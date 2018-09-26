@@ -12,7 +12,7 @@ public class Player { // NOT REAL Player class - for demo purposes only
         catch(Exception e){} // Handle possible exception
         System.out.println(this.name+" has taken their turn.");
         this.finalScore += (int)(Math.floor(Math.random()*10));
-        if(Math.random()>0.9){ // 20% chance to stop playing randomly
+        if(Math.random()>0.7){ // 30% chance to stop playing randomly
             isPlaying=false;
             System.out.println(this.name+" has stopped playing.");
         }
