@@ -3,63 +3,100 @@ public class Rules {
     private static int Playeramount;
     private boolean[] Scoring;
     private int totalScore;
-    private int[] catagoryScore;
-    private boolean[] catagoryCheck;
+    private int[] categoryScore;
+    private boolean[] categoryCheck;
     private Player player;
+    boolean random = true;
     //needs to get created for every player at the time that the player is created
 
     public Rules(Player player) {
         this.player = player;
-        catagoryCheck = new boolean[13];
-        for (int i = 0; i < catagoryCheck.length; i++) {
-            catagoryCheck[i] = false;
+        categoryCheck = new boolean[13];
+        for (int i = 0; i < categoryCheck.length; i++) {
+            categoryCheck[i] = false;
 
         }
 
         for (Player player) {
-        catagoryScore = new int[13];
-        for (int i = 0; i < catagoryScore.length; i++) {
-            catagoryScore[i] = 0;
-        }
+            categoryScore = new int[13];
+            for (int i = 0; i < categoryScore.length; i++) {
+                categoryScore[i] = 0;
+            }
         }
     }
 
+    //what score is in that catagory
     public int checkScore(player.Die[] dice) {
-        for (int i = 0; i < this.catagoryCheck.length; i++) {
-            if (catagoryCheck[i]) {
+        for (int i = 0; i < this.categoryCheck.length; i++) {
+            if (categoryCheck[i]) {
                 return dice;
             } else if (checkAces()) {
-                catagoryScore[] = 
-            }
-
-            public int checkDie(int faceValue) {
-                for (faceValue = player.Die[]);
+                Player.Die[] =categoryScore[1];
+            } else if (checkTwos()) {
 
             }
-
         }
-    return Die[];
+
+    }
+        private int sumDice(int[] dice, int value){
+            int subTotal = 0;
+            for(int facevalue: dice){
+               if(facevalue == value){
+                   subTotal += facevalue;
+               }
+            }
+            return subTotal;
+        }
+
+        public int checkDie (int[] dice){
+
+        int diceValue = this.player.getScore();
+           if(checkAces(dice)){
+              diceValue += sumDice(dice, 1);
+              this.player.setScore = diceValue;
+           }
+
+
+        return diceValue;
     }
 
 
-    private boolean checkAces(){
-        if(catagoryCheck[0]==true){
-            return true;
+    private boolean checkAces(int[] dice) {
+
+                for(int faceValue: dice){
+                    if(faceValue ==1){
+                        return true;
+
+                    }
+
+                }
+                return false;
+            }
+
+    private boolean checkTwos(int[] dice) {
+        for(int faceValue: dice){
+            if(faceValue ==2){
+                return true;
+
+            }
+
         }
-        else{
-            return false;
-        }
+        return false;
     }
+
+    }
+
     public boolean[] getScoring() {
         return Scoring;
     }
 
     public int getTotalScore() {
-        return totalScore;
-        //get player: + all 1-13 catagories added up;
+        getTotalScore(Player player) = totalScore;
+        totalScore = categoryScore[1] + categoryScore[2] + categoryScore[3] + categoryScore[4]
+        + categoryScore[5]+categoryScore[6]+categoryScore[7]+categoryScore[8]+categoryScore[9]
+        +categoryScore[10]+categoryScore[11]+categoryScore[12]+categoryScore[13];
+
+
     }
-
-
-
 
 }
