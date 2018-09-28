@@ -54,6 +54,9 @@ public class Rules {
            if(checkAces(dice)){
               diceValue += sumDice(dice, 1);
               this.player.setScore = diceValue;
+           } else if (checkTwos(dice)) {
+           diceValue += sumDice(dice, 2);
+           this.player.setScore = diceValue;
            }
 
 
@@ -66,24 +69,39 @@ public class Rules {
                 for(int faceValue: dice){
                     if(faceValue ==1){
                         return true;
-
-                    }
-
-                }
+                    } }
                 return false;
-            }
-
-    private boolean checkTwos(int[] dice) {
-        for(int faceValue: dice){
-            if(faceValue ==2){
+            } private boolean checkTwos(int[] dice) {
+        for (int faceValue : dice) {
+            if (faceValue == 2) {
                 return true;
-
-            }
-
-        }
+            } }
+        return false;
+    } private boolean checkThrees(int[] dice) {
+        for(int faceValue: dice){
+            if(faceValue ==3){
+                return true;
+            } }
+        return false;
+    } private boolean checkFours(int[] dice) {
+        for(int faceValue: dice){
+            if(faceValue ==4){
+                return true;
+            } }
+        return false;
+    } private boolean checkFives(int[] dice) {
+        for(int faceValue: dice){
+            if(faceValue ==5){
+                return true;
+            } }
+        return false;
+    } private boolean checkSixes(int[] dice) {
+        for(int faceValue: dice){
+            if(faceValue ==6){
+                return true;
+            } }
         return false;
     }
-
     }
 
     public boolean[] getScoring() {
