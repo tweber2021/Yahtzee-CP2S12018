@@ -5,6 +5,7 @@ public class Die {
         rollDie(); // Automatically roll die upon creation
     }
 
+    
     public void rollDie(){
         this.faceValue = (int)(Math.floor(Math.random()*6)+1); // Randomize Die's faceValue
     }
