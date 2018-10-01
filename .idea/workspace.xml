@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ChangeListManager">
 
     <list default="true" id="dea6e838-703d-4c9d-9354-45054e160596" name="Default" comment="">
@@ -129,12 +130,15 @@
       </list>
     </option>
   </component>
+=======
+  <component name="ProjectFrameBounds">
+    <option name="x" value="451" />
+    <option name="y" value="4" />
+    <option name="width" value="526" />
+    <option name="height" value="735" />
+  </component>
+>>>>>>> master
   <component name="RunManager">
-    <configuration name="Yahtzee" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Yahtzee" />
-      <module name="Yahtzee-CP2S12018" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -176,6 +180,7 @@
       <properties />
       <listeners />
     </configuration>
+<<<<<<< HEAD
     <recent_temporary>
       <list>
         <item itemvalue="Application.Yahtzee" />
@@ -438,5 +443,7 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> master
   </component>
 </project>
