@@ -2,7 +2,22 @@ import java.util.Scanner;
 
 public class Player {
 
+    private String name;
     private int score;
+    private boolean isPlaying;
+    private int finalScore;
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public Player(boolean isPlaying) {
+        this.isPlaying = isPlaying;
+    }
+
+    public Player(int finalScore) {
+        this.finalScore = finalScore;
+    }
 
     public int getScore() {
         return score;
@@ -11,6 +26,17 @@ public class Player {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public String getName() {
+        return this.name;
+    }
+    public boolean getIsPlaying() {
+        return this.isPlaying;
+    }
+    public int getFinalScore() {
+        return this.finalScore;
+    }
+
 
     //Turns could be handled by one takeTurn() method to encapsulate all of the player's options. After this method has
     //run completely, the player's turn will automatically be terminated, voiding the need for a method to end the turn.
@@ -27,6 +53,7 @@ public class Player {
    // String findPlayerName
 
 
+//  public int takeTurn(int i) {
     public void takeTurn(int i) {
 
       /* String def; //if you try to name a variable default it causes errors
@@ -79,9 +106,7 @@ public class Player {
 
        //adding these in because according to Trello, the main class depends on these three variables being in the Player class (I think...)
 
-        //public String getName();
-        //public boolean getIsPlaying();
-        //public int getFinalScore();
+
 
 
 
@@ -151,7 +176,7 @@ public class Player {
 
 
         //temporary return statement
-       // return;
+  //      return getTotalScore;
         }
 
 
