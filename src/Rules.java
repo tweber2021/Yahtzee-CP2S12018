@@ -1,13 +1,13 @@
 public class Rules {
 
-    private static int Playeramount;
     private boolean[] Scoring;
     private int totalScore;
     private int[] categoryScore;
     private boolean[] categoryCheck;
     private Player player;
-    boolean random = true;
+
     //needs to get created for every player at the time that the player is created
+
 
     public Rules(Player player) {
         this.player = player;
@@ -26,7 +26,7 @@ public class Rules {
     }
 
     //what score is in that catagory
-    public int checkScore(player.Die[] dice) {
+    public int checkScore(Die[] dice) {
         for (int i = 0; i < this.categoryCheck.length; i++) {
             if (categoryCheck[i]) {
                 return dice;
@@ -64,10 +64,10 @@ public class Rules {
     }
 
 
-    private boolean checkAces(int[] dice) {
+    private boolean checkAces(Die[] dice) {
 
                 for(int faceValue: dice){
-                    if(faceValue ==1){
+                    if(faceValue. ==1){
                         return true;
                     } }
                 return false;
@@ -79,41 +79,48 @@ public class Rules {
         return false;
     } private boolean checkThrees(int[] dice) {
         for(int faceValue: dice){
-            if(faceValue ==3){
+            if(faceValue == 3){
                 return true;
             } }
         return false;
     } private boolean checkFours(int[] dice) {
         for(int faceValue: dice){
-            if(faceValue ==4){
+            if(faceValue == 4){
                 return true;
             } }
         return false;
     } private boolean checkFives(int[] dice) {
         for(int faceValue: dice){
-            if(faceValue ==5){
+            if(faceValue == 5){
                 return true;
             } }
         return false;
     } private boolean checkSixes(int[] dice) {
         for(int faceValue: dice){
-            if(faceValue ==6){
+            if(faceValue == 6){
                 return true;
             } }
         return false;
     }
-    }
+
+    //Lower section will be worked on during beta
+
+
+
+
+
+
+
 
     public boolean[] getScoring() {
         return Scoring;
     }
 
+    // This obvoiusly cant be done until atleast beta because alpha will not have lower section complete yet to add up
+    // this is aviable for any class so its set public if you need it for main
     public int getTotalScore() {
         getTotalScore(Player player) = totalScore;
-        totalScore = categoryScore[1] + categoryScore[2] + categoryScore[3] + categoryScore[4]
-        + categoryScore[5]+categoryScore[6]+categoryScore[7]+categoryScore[8]+categoryScore[9]
-        +categoryScore[10]+categoryScore[11]+categoryScore[12]+categoryScore[13];
-
+        totalScore =
 
     }
 
