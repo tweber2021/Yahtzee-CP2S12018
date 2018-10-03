@@ -2,22 +2,36 @@ import java.util.Scanner;
 
 public class Player {
 
+    //initializes variables
     private String name;
     private int score;
     private boolean isPlaying;
-    private int finalScore;
+    Die[] dice;
+ //   private int finalScore;
 
+    //initializes constructors, getters, setters, and the array that holds the dice.
     public Player(String name) {
         this.name = name;
+        dice = new Die[5];
+
+        /*for(Die die: dice){
+            die.
+        }*/
+    }
+
+    public Die[] getDice() {
+        return dice;
+    }
+
+    public void setDice(Die[] dice) {
+        this.dice = dice;
     }
 
     public Player(boolean isPlaying) {
         this.isPlaying = isPlaying;
     }
 
-    public Player(int finalScore) {
-        this.finalScore = finalScore;
-    }
+ //   public Player(int finalScore) {this.finalScore = finalScore;}
 
     public int getScore() {
         return score;
@@ -33,137 +47,66 @@ public class Player {
     public boolean getIsPlaying() {
         return this.isPlaying;
     }
-    public int getFinalScore() {
-        return this.finalScore;
-    }
 
+    //getFinalScore is no longer needed
+   // public int getFinalScore() {return this.finalScore;}
 
-    //Turns could be handled by one takeTurn() method to encapsulate all of the player's options. After this method has
-    //run completely, the player's turn will automatically be terminated, voiding the need for a method to end the turn.
-
-
-
-
-    //possibly do research over weekend and figure out how to set-up the code to be able to get the name of the players
-    //for use in the System.out.println(); that will print out a line saying which player's turn it is.
-
-    //below line is for testing
-
-
-   // String findPlayerName
-
-
+    //method takeTurn that will contain all of the aspects of a player's turn.
 //  public int takeTurn(int i) {
-    public void takeTurn(int i) {
+    public int takeTurn() {
 
-      /* String def; //if you try to name a variable default it causes errors
+        Scanner reRoll = new Scanner(System.in); //scanner used to ask the player if they want to re-roll the dice after
+        // an initial or previous roll on their current turn.
 
-        String name(def) {
-            this()
-        } */
-   //     String Name = Test;
-        //Scanner playerName = new Scanner(System.in);
-
-        Scanner reRoll = new Scanner(System.in);
-       // Scanner tester = new Scanner(System.in);
-
-//    public int numberOfPlayers() {
-//        System.out.println("Welcome to Yahtzee! Please enter the number of players that will be playing the game.");
-//
-//    }
-        //trying to use private int Die for testing the code but that doesn't seem possible unless the Die class exists on this computer.
-        int Die;
-
-     //make sure to uncomment when done testing
-
-
-     /*   public String getName() {
-            return Name;
-        } */
-
-       // String findPlayerName;
-     //   Player(String findPlayerName) {
-
-       // }
-
-//        Player() {this("test");}
-//
-//        //test code to get player name
-//        public String getFindPlayerName() {
-//            return findPlayerName;
-//        }
-//
-//        //test code to set PlayerName
-//        public void setFindPlayerName(String findPlayerName) {
-//            findPlayerName = playerName.nextLine();
-//        }
-
-
-       /* public void takeTurn() - allows player to take their turn - passing turns to other players are automatically handled by Main.
-        public String getName() - returns Player name.
-        public boolean getIsPlaying() - returns whether a player is playing or not.
-        public int getFinalScore() - returns a player's final score after the game ends. */
-
-       //adding these in because according to Trello, the main class depends on these three variables being in the Player class (I think...)
-
-
-
+        //code TODO in next build of player class
+        //ask the player after rolling which dice they would like to set aside by having them type a number 1 through 5
+        // where each number corresponds to a dice, and then asks them if they want to set aside another dice to allow
+        // them to set aside more than just one dice, but set it up so they can't set aside they same dice more than
+        // once to avoid potential errors? Then set up a for loop so that when the player next rolls, it only re-rolls
+        // the dice that they didn't set aside. (We could make variables called dice(dice #) re-roll which would be
+        // boolean variables initially initialized as false, then change them to true if the player wants to re-roll
+        // that certain dice, but set any of them that are true back to false after the roll.)
 
 
 
         //array to hold 5 dice is needed
 
-        //temporarily comment out the 5 dice for testing code first
-        Die die1 = new Die();
+       // int[] Die = new int[5];
+
+        /*Die die1 = new Die();
         Die die2 = new Die();
         Die die3 = new Die();
         Die die4 = new Die();
-        Die die5 = new Die();
+        Die die5 = new Die();*/
 
-        i=0;
-       // String yes;
+        int i=0; //initializes a variable i that keeps track of the number of the times the dice were rolled.
 
-        //test code
-       // String t = "test";
+            System.out.println("It is now player " + getName() + "'s turn."); //returns the name of the player who's
+        // turn it is
 
-       /* //more test
-        System.out.println("Enter player name");
-        String Name = tester.nextLine(); */
+        while(i<=2) { //while the variable i is less than or equal to 2 (i=0 is the first/initial roll.), return the
+            // dice value for all five dice that the player rolled.
 
-
-
-            System.out.println("It is now player " + getName() + "'s turn.");
-
-        //test code
-       // System.out.println("It is now player " + Name + "'s turn.");
-
-            // code to roll dice and print the values, need to contact person doing that piece of code to make sure I
-            // get the name of the method that rolls the dice or stores the results of the roll, or both.
-
-        while(i<=2) {
-
-            //get result from all five dice rolled and print them out to the player
-
-            //commenting out the system out println to test code
-            System.out.println("You Rolled: " + die1.getFaceValue() + " " + die2.getFaceValue() + " " + die3.getFaceValue() + " " + die4.getFaceValue() + " " + die5.getFaceValue());
-
-            //code for testing
-          //  System.out.println(i);
+            System.out.println("You Rolled: " + dice[0].getFaceValue() + " " + dice[1].getFaceValue() + " " +
+                    dice[2].getFaceValue() + " " + dice[3].getFaceValue() + " " + dice[4].getFaceValue());
 
             System.out.println(" ");
 
-            boolean answeredCorrectly = false;
+            boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
+            // if they would like to re-roll, but it will keep them here unless they answer yes or no.
+
             do {
                 System.out.println("Would you like to roll again?");
                 String reRollDice = reRoll.nextLine();
 
                 if (reRollDice.equalsIgnoreCase("yes")) {
-                    i = i + 1;
-                    answeredCorrectly = true;
+                   i = i + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2 then it is
+                    // now the third roll.
+                    answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
                 }
                 else if (reRollDice.equalsIgnoreCase("no")) {
-                    i = 3;
-                    answeredCorrectly=true;
+                    i = 3; //sets the roll count to 3,
+                    answeredCorrectly=true; //releases the user from the answeredCorrectly 'loop'
                 } else {
                     answeredCorrectly = false;
                 }
@@ -171,21 +114,8 @@ public class Player {
 
         }
 
-        //code for testing
-        //System.out.println(i);
+        return getScore();
 
-
-        //temporary return statement
-  //      return getTotalScore;
         }
 
-
-
-
-
-       // String i = Integer.toString(i);
     }
-
-
-//below commented line is how to convert from int to string
-    //String s = Integer.toString(y)
