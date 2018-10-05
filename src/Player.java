@@ -5,8 +5,9 @@ public class Player {
     //initializes variables
     private String name;
     private int score;
-    private boolean isPlaying;
+    private boolean isPlaying = true;
     Die[] dice;
+ //   private boolean diceHeld;
  //   private int finalScore;
 
     //initializes constructors, getters, setters, and the array that holds the dice.
@@ -48,7 +49,15 @@ public class Player {
         return this.isPlaying;
     }
 
-    //getFinalScore is no longer needed
+ /*   public boolean getDiceHeld() {
+        return diceHeld;
+    } */
+
+ /*   public void setDiceHeld(boolean diceHeld) {
+        this.diceHeld = diceHeld;
+    } */
+
+//getFinalScore is no longer needed
    // public int getFinalScore() {return this.finalScore;}
 
     //method takeTurn that will contain all of the aspects of a player's turn.
@@ -66,6 +75,26 @@ public class Player {
         // the dice that they didn't set aside. (We could make variables called dice(dice #) re-roll which would be
         // boolean variables initially initialized as false, then change them to true if the player wants to re-roll
         // that certain dice, but set any of them that are true back to false after the roll.)
+
+/*
+boolean[] heldDie;
+
+
+
+
+
+    boolean heldDice = new heldDie[5];
+heldDie[0] = true;
+heldDie[1] = true;
+heldDie[2] = true;
+heldDie[3] = true;
+heldDie[4] = true;
+
+//    private heldDie[] getHeldDie() {
+//        return heldDie;
+//            }
+
+ */
 
 
 
