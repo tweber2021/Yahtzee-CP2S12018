@@ -113,8 +113,27 @@ heldDie[4] = true;
             System.out.println("It is now player " + getName() + "'s turn."); //returns the name of the player who's
         // turn it is
 
+
+
         while(i<=2) { //while the variable i is less than or equal to 2 (i=0 is the first/initial roll.), return the
             // dice value for all five dice that the player rolled.
+
+
+
+         for(Die die: dice) {
+             //if()
+
+             die.rollDie();
+         }
+
+           /* for(int i=0; i<dice.length;i++) {
+
+                if(input==i){
+                    continue;
+                }
+                die.rollDie();
+            } */
+
 
             System.out.println("You Rolled: " + dice[0].getFaceValue() + " " + dice[1].getFaceValue() + " " +
                     dice[2].getFaceValue() + " " + dice[3].getFaceValue() + " " + dice[4].getFaceValue());
@@ -131,6 +150,15 @@ heldDie[4] = true;
                 if (reRollDice.equalsIgnoreCase("yes")) {
                    i = i + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2 then it is
                     // now the third roll.
+
+//                    public boolean dieHeld(reRoll.nextLine()); {
+//                        for();
+//                    }
+
+//                    public boolean dieIsHeld(int ... a) {
+//                        for(reRollDice ("0"));
+//                    }
+
                     answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
                 }
                 else if (reRollDice.equalsIgnoreCase("no")) {
@@ -147,4 +175,5 @@ heldDie[4] = true;
 
         }
 
-    }
+
+}
