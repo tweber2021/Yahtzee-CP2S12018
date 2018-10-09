@@ -13,7 +13,10 @@ public class Player {
     //initializes constructors, getters, setters, and the array that holds the dice.
     public Player(String name) {
         this.name = name;
-        dice = new Die[5];
+       // dice = new Die[5];
+        for(int i = 0; i<dice.length;i++){
+            dice[i] = new Die();
+        }
 
         /*for(Die die: dice){
             die.
@@ -76,25 +79,25 @@ public class Player {
         // boolean variables initially initialized as false, then change them to true if the player wants to re-roll
         // that certain dice, but set any of them that are true back to false after the roll.)
 
-/*
-boolean[] heldDie;
+
+boolean [] heldDie;
 
 
 
 
 
-    boolean heldDice = new heldDie[5];
-heldDie[0] = true;
-heldDie[1] = true;
-heldDie[2] = true;
-heldDie[3] = true;
-heldDie[4] = true;
+    heldDie = new boolean[5];
+heldDie[0] = false;
+heldDie[1] = false;
+heldDie[2] = false;
+heldDie[3] = false;
+heldDie[4] = false;
 
-//    private heldDie[] getHeldDie() {
-//        return heldDie;
-//            }
+   /* private boolean[] getHeldDie(boolean [] pHeldDie) {
+        return pHeldDie;
+            } */
 
- */
+
 
 
 
@@ -120,11 +123,16 @@ heldDie[4] = true;
 
 
 
-         for(Die die: dice) {
-             //if()
 
-             die.rollDie();
-         }
+             for(int d=0; d<dice.length;d++) {
+                 if(!heldDie[d]) {
+                    dice[d].rollDie();
+                 }
+                 else {
+                    continue;
+                 }
+             }
+
 
            /* for(int i=0; i<dice.length;i++) {
 
@@ -148,9 +156,21 @@ heldDie[4] = true;
                 String reRollDice = reRoll.nextLine();
 
                 if (reRollDice.equalsIgnoreCase("yes")) {
+
+                    heldDie[0]=false;
+                    heldDie[1]=false;
+                    heldDie[2]=false;
+                    heldDie[3]=false;
+                    heldDie[4]=false;
+
                    i = i + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2 then it is
                     // now the third roll.
 
+                    System.out.println("Please enter the number for the dice you want to set aside for the next roll (You can enter more than one number). (Example: 0 is the first dice and 2 is the third dice.) ");
+                    String holdDice = reRoll.nextLine();
+                    if (holdDice.equals("")) {
+
+                    }
 //                    public boolean dieHeld(reRoll.nextLine()); {
 //                        for();
 //                    }
