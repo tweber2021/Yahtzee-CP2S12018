@@ -168,6 +168,7 @@ heldDie[4] = false;
 
                     System.out.println("Please enter the number for the dice you want to set aside for the next roll (You can enter more than one number). (Example: 0 is the first dice and 2 is the third dice.) ");
                     String holdDice = reRoll.nextLine();
+                    //figure out how to check for numbers entered but also at the same time work regardless of the order the numbers are entered in (Example: entering "0 2" should work the same as entering "2 0" without creating separate code for each clause.
                     if (holdDice.equals("")) {
 
                     }
