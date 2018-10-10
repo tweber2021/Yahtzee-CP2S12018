@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Player {
 
@@ -6,14 +7,14 @@ public class Player {
     private String name;
     private int score;
     private boolean isPlaying = true;
-    Die[] dice;
+    private Die[] dice;
  //   private boolean diceHeld;
  //   private int finalScore;
 
     //initializes constructors, getters, setters, and the array that holds the dice.
     public Player(String name) {
         this.name = name;
-       // dice = new Die[5];
+        dice = new Die[5];
         for(int i = 0; i<dice.length;i++){
             dice[i] = new Die();
         }
@@ -27,9 +28,7 @@ public class Player {
         return dice;
     }
 
-    public void setDice(Die[] dice) {
-        this.dice = dice;
-    }
+  //  public void setDice(Die[] dice) {this.dice = dice;}
 
     public Player(boolean isPlaying) {
         this.isPlaying = isPlaying;
@@ -41,7 +40,7 @@ public class Player {
         return score;
     }
 
-    public void setScore(int score) {
+    private void setScore(int score) {
         this.score = score;
     }
 
@@ -65,7 +64,7 @@ public class Player {
 
     //method takeTurn that will contain all of the aspects of a player's turn.
 //  public int takeTurn(int i) {
-    public int takeTurn() {
+    public void takeTurn() {
 
         Scanner reRoll = new Scanner(System.in); //scanner used to ask the player if they want to re-roll the dice after
         // an initial or previous roll on their current turn.
@@ -80,13 +79,8 @@ public class Player {
         // that certain dice, but set any of them that are true back to false after the roll.)
 
 
-boolean [] heldDie;
+boolean [] heldDie = new boolean[5];
 
-
-
-
-
-    heldDie = new boolean[5];
 heldDie[0] = false;
 heldDie[1] = false;
 heldDie[2] = false;
@@ -157,28 +151,61 @@ heldDie[4] = false;
 
                 if (reRollDice.equalsIgnoreCase("yes")) {
 
-                    heldDie[0]=false;
-                    heldDie[1]=false;
-                    heldDie[2]=false;
-                    heldDie[3]=false;
-                    heldDie[4]=false;
+                    Arrays.fill(heldDie, false);
 
                    i = i + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2 then it is
                     // now the third roll.
 
-                    System.out.println("Please enter the number for the dice you want to set aside for the next roll (You can enter more than one number). (Example: 0 is the first dice and 2 is the third dice.) ");
-                    String holdDice = reRoll.nextLine();
-                    //figure out how to check for numbers entered but also at the same time work regardless of the order the numbers are entered in (Example: entering "0 2" should work the same as entering "2 0" without creating separate code for each clause.
-                    if (holdDice.equals("")) {
+                   // int h = 0;
+                    System.out.println("How many dice would you like to set aside? (This is amount of dice, not the " +
+                            "dice themselves.");
+                   int desiredHeldDie = reRoll.nextInt();
 
+
+                    for (int h=0;h<desiredHeldDie;h++) {
+                        System.out.println("Which dice would you like to set aside? (This is the actual dice, not the " +
+                                "amount of dice you want to set aside.");
+                        int hold2 = reRoll.nextInt();
+                        heldDie[hold2-1]=true;
+                        h = h+1;
                     }
-//                    public boolean dieHeld(reRoll.nextLine()); {
-//                        for();
-//                    }
 
-//                    public boolean dieIsHeld(int ... a) {
-//                        for(reRollDice ("0"));
+
+//                    System.out.println("Please enter the number for the dice you want to set aside for the next roll " +
+//                            "(You can enter more than one number). (Example: 0 is the first dice and 2 is the third " +
+//                            "dice.) ");
+//                    String holdDice = reRoll.nextLine();
+//                    //figure out how to check for numbers entered but also at the same time work regardless of the
+//                    // order the numbers are entered in (Example: entering "0 2" should work the same as entering "2 0"
+//                    // without creating separate code for each clause.
+//
+//                    if (holdDice.equals("0")) {
+//                        heldDie[0]=true;
 //                    }
+//                    if (holdDice.equals("1")) {
+//                        heldDie[1]=true;
+//                    }
+//                    if (holdDice.equals("2")) {
+//                        heldDie[2]=true;
+//                    }
+//                    if (holdDice.equals("3")) {
+//                        heldDie[3]=true;
+//                    }
+//                    if (holdDice.equals("4")) {
+//                        heldDie[4]=true;
+//                    }
+//
+//                    //test idea
+//                    if (holdDice.equals(heldDie[i])) {
+//                        heldDie[i]=true;
+//                    }
+////                    public boolean dieHeld(reRoll.nextLine()); {
+////                        for();
+////                    }
+//
+////                    public boolean dieIsHeld(int ... a) {
+////                        for(reRollDice ("0"));
+////                    }
 
                     answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
                 }
@@ -186,13 +213,14 @@ heldDie[4] = false;
                     i = 3; //sets the roll count to 3,
                     answeredCorrectly=true; //releases the user from the answeredCorrectly 'loop'
                 } else {
+                    System.out.println("This is a yes/no question. Please respond with \"yes\" or \"no\".");
                     answeredCorrectly = false;
                 }
             } while(!answeredCorrectly);
 
         }
 
-        return getScore();
+       // return getScore();
 
         }
 
