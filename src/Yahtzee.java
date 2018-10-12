@@ -49,14 +49,14 @@ public class Yahtzee {
 
         static void printFinalScores(Player players[]){
                 for(int i=0;i<players.length;i++){
-                        System.out.println(players[i].getName()+": "+players[i].getFinalScore()+" pts.");
+                        System.out.println(players[i].getName()+": "+players[i].getScore()+" pts.");
                 }
         }
 
         static String getWinnerName(Player players[]){
                 int winner = 0; // Replaced if "Player 0" does not win
                 for(int i=0;i<players.length;i++){
-                        if(players[i].getFinalScore() > players[winner].getFinalScore()){winner = i;}
+                        if(players[i].getScore() > players[winner].getScore()){winner = i;}
                 }
                 return players[winner].getName();
         }
