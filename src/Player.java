@@ -17,6 +17,8 @@ public class Player {
         dice = new Die[5];
         for(int i = 0; i<dice.length;i++){
             dice[i] = new Die();
+            //need to have each Player Object hold it's own score so that when all 13 rounds are over for each player,
+            // a winner can be calculated and declared.
         }
 
         /*for(Die die: dice){
@@ -208,10 +210,12 @@ heldDie[4] = false;
 ////                    }
 
                     answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
+
                 }
                 else if (reRollDice.equalsIgnoreCase("no")) {
                     i = 3; //sets the roll count to 3,
                     answeredCorrectly=true; //releases the user from the answeredCorrectly 'loop'
+
                 } else {
                     System.out.println("This is a yes/no question. Please respond with \"yes\" or \"no\".");
                     answeredCorrectly = false;
@@ -219,7 +223,7 @@ heldDie[4] = false;
             } while(!answeredCorrectly);
 
         }
-
+//need to call up the Rules class to calculate the score for the round
        // return getScore();
 
         }
