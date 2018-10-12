@@ -7,18 +7,14 @@ public class Rules {
     private Player player;
 
 
-    // Player class creates new player in here
+    // Player class holds a play from its class, then will grab this.player to be specifice to correctly grabbing the right player
+    // categoryCheck is a new 13 array list, the index is 0-12 however, but we have the program set all to false.
     public Rules(Player player) {
-
-
-        // Getting whichever players going
         this.player = player;
-
-
-        // Created 13 true or false categories
         categoryCheck = new boolean[13];
 
-/*
+
+/*      For later on
 
         // length i is starting at 0, Category 1 would be 0, and so on.
         for (int i = 0; i < categoryCheck.length;i++) {
@@ -30,17 +26,10 @@ public class Rules {
 */
 
 
-
-
-
-            // Creating 13 default 0 categories with categoryScore holding dice values
+            //Creating categoryScore to 13 new int's 0-12 in index form
+            // We use I as an index just to replicate a for () for temp use in this method
             categoryScore = new int[13];
-            // Just like categoryCheck but with int, 0-12 , 13 available numbers
             for (int i = 0; i < categoryScore.length; i++) {
-
-
-                // This is where the players score starts at, 0 for default
-                // If a player scores a 0 it will count as a new score and flip the boolean from false to true
                 categoryScore[i] = 0;
             }
 
@@ -48,6 +37,13 @@ public class Rules {
 
 
 
+
+    // This is getting the chose category and checking it
+    // pValue is temporary there choice every time chose is chosen, since its not in index form were -1 to make sure it selects 0-12
+    // As long as they chose categories 1-6 this will recognise certain number for the category
+    // checkUpper is making sure a number equals that ruled number and getting how many dice values equal up to it
+    // Now were setting the score for chosen category and making it there score which is sumDice that holds the score
+    // We check that category off by turning it true so it is not re usable
 
     public boolean checkCategoryInput(int chose) {
         if(checkCategory(chose-1)){
@@ -67,6 +63,9 @@ public class Rules {
         return false;
     }
 
+    //This goes throw each dice, so it will loop 5 times checking each value and setting it
+    // as long as certain values match up will count them as score but is depended on the category that's selected.
+
     private boolean checkUpper(Die[] dice, int value) {
         for (Die mFaceValue: dice) {
             if (mFaceValue.getFaceValue() == value) {
@@ -75,6 +74,8 @@ public class Rules {
         return false;
     }
 
+    // Just to clarify if the category is available for use, if false it is
+    // the return value may look switched but default was set to check as long as its default it can be used.
     public boolean checkCategory(int pValue) {
         int fixedNumber;
         if (pValue < 1 || pValue > 12) {
@@ -204,6 +205,8 @@ public class Rules {
     //Lower section will be worked on during beta
 
 
+        // Grabbing how many dices rolled on that number
+    // Will be different for lower section
     public void calculatePlayerScore(){
         int subtotal = 0;
         for(int value: categoryScore){
@@ -216,13 +219,11 @@ public class Rules {
 
 
 
+    // Just returning the total score from each category score
 
     public boolean[] getScoring() {
         return Scoring;
     }
-
-    // This obviously cant be done until atleast beta because alpha will not have lower section complete yet to add up
-    // this is available for any class so its set public if you need it for main
     public int getTotalScore() {
         return totalScore;
 
