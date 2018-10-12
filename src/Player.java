@@ -164,7 +164,7 @@ heldDie[4] = false;
                    int desiredHeldDie = reRoll.nextInt();
 
 
-                    for (int h=0;h<desiredHeldDie;h++) {
+                    for (int h=0;h<=desiredHeldDie;h++) {
                         System.out.println("Which dice would you like to set aside? (This is the actual dice, not the " +
                                 "amount of dice you want to set aside.");
                         int hold2 = reRoll.nextInt();
