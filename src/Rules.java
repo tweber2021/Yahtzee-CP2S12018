@@ -1,3 +1,5 @@
+import java.lang.reflect.WildcardType;
+
 public class Rules {
 
     private boolean[] Scoring;
@@ -183,7 +185,7 @@ public class Rules {
             diceValue += sumDice(dice,i);
             // diceValue now equals the amount of dices that equalled a one, so 1-5, and this score will be set into the categoryScore[0] later
 
-            //New ]]
+            //New
             //NewDvalue += totalDice()
 
 
