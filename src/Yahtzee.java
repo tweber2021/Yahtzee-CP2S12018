@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Yahtzee {
         public static void main(String[] args){
@@ -6,8 +7,15 @@ public class Yahtzee {
                 System.out.println("Welcome to Yahtzee!\n");
 
                 // Ask for number of players and their names
-                int totalPlayers = promptInt("How many players are there?");
-                Player players[] = new Player[totalPlayers];
+                boolean legalPlayerNum = false;
+                Player players[];
+                int totalPlayers = 1;
+                while(!legalPlayerNum) {
+                    totalPlayers = promptInt("How many players are there?");
+                    if(totalPlayers>=1&&totalPlayers<=1000){legalPlayerNum=true;}
+                    else{System.out.println("Please enter a number between 1 and 1000.");}
+                }
+                players = new Player[totalPlayers];
                 for(int i=0;i<totalPlayers;i++){
                         players[i] = new Player(promptString("What is Player "+(i+1)+"'s name?"));
                 }
@@ -15,24 +23,57 @@ public class Yahtzee {
 
                 // Gameplay loop
                 while(anyPlaying(players)){ // While anyone is playing, allow players to take their turn only if they are playing
-                        for(int p=0;p<totalPlayers;p++){
-                                if(players[p].getIsPlaying()){players[p].takeTurn();}
-                        }
+                       for(int p=0;p<totalPlayers;p++){
+                              if(players[p].getIsPlaying()){players[p].takeTurn();}
+                       }
                 }
 
                 // Display final scores and declare the winner
-                System.out.println();
+                System.out.println("- Final Scores -");
                 printFinalScores(players);
                 System.out.println("\n"+getWinnerName(players)+" wins!");
         }
 
         // ------------------------------------------------------------------------------------------------------ //
+        static void checkIntInput(String prompt) throws InputMismatchException {
+            int output = 0;
+          try{
+             output = promptInt(prompt);
+          }
+          catch (InputMismatchException e){
+              System.out.println("You did not use a valid number\nPlease try again");
+              checkIntInput(prompt);
+            }
 
-        static int promptInt(String prompt){
-                Scanner sc = new Scanner(System.in);
-                System.out.print(prompt+" ");
-                return sc.nextInt();
         }
+
+        static int promptInt(String prompt) throws InputMismatchException{
+                Scanner sc = new Scanner(System.in);
+                //boolean success = false;
+                int output = 0;
+                String response;
+                //while(!success) {
+                    System.out.print(prompt + " ");
+                    //success = true; // Allow user input to pass unless exception occurs.
+                     //response = sc.nextLine();
+                     //output = (Integer.parseInt(response);
+                    try{
+                      output = sc.nextInt();
+                    }
+                    catch (InputMismatchException e){
+                        System.err.println("You have not entered a valid integer.");
+                        output = 0;
+                    }
+
+                        //System.err.println("You have not entered a valid integer.");
+                       // success = false;
+                //}
+
+
+                return output;
+        }
+
+
 
         static String promptString(String prompt){
                 Scanner sc = new Scanner(System.in);
