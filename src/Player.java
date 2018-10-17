@@ -68,8 +68,8 @@ public class Player {
 //  public int takeTurn(int i) {
     public void takeTurn() {
 
-        Scanner reRoll = new Scanner(System.in); //scanner used to ask the player if they want to re-roll the dice after
-        // an initial or previous roll on their current turn.
+        Scanner reRoll = new Scanner(System.in); //scanner used to ask the player if they want to re-roll the dice
+        // after an initial or previous roll on their current turn.
 
         //code TODO in next build of player class
         //ask the player after rolling which dice they would like to set aside by having them type a number 1 through 5
@@ -107,17 +107,25 @@ heldDie[4] = false;
         Die die4 = new Die();
         Die die5 = new Die();*/
 
-        int i=0; //initializes a variable i that keeps track of the number of the times the dice were rolled.
 
-            System.out.println("It is now player " + getName() + "'s turn."); //returns the name of the player who's
+
+        int rollNumber=0; //initializes a variable i that keeps track of the number of the times the dice were rolled.
+       // if (rollNumber<2) { //should not ask player if they want to roll again after last roll.
+        //System.out.println("i initial:"+i);
+
+        String playersTurnPhrase = "It is now player " + getName() + "'s turn.";
+            System.out.println(playersTurnPhrase); //returns the name of the player who's
         // turn it is
+        for(int i = 0; i<playersTurnPhrase.length();i++) {
+            System.out.print("_");
+        }
+        System.out.println("");
 
 
+        while(rollNumber<=2) { //while the variable i is less than or equal to 2 (i=0 is the first/initial roll.),
+            // return the dice value for all five dice that the player rolled.
 
-        while(i<=2) { //while the variable i is less than or equal to 2 (i=0 is the first/initial roll.), return the
-            // dice value for all five dice that the player rolled.
-
-
+           // System.out.println("i inside of while:"+rollNumber);
 
 
              for(int d=0; d<dice.length;d++) {
@@ -147,30 +155,47 @@ heldDie[4] = false;
             boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
             // if they would like to re-roll, but it will keep them here unless they answer yes or no.
 
-            do {
-                System.out.println("Would you like to roll again?");
-                String reRollDice = reRoll.nextLine();
+    do {
+        System.out.println("Would you like to roll again?");
+        String reRollDice = reRoll.nextLine();
 
-                if (reRollDice.equalsIgnoreCase("yes")) {
+        if (reRollDice.equalsIgnoreCase("yes")) {
 
-                    Arrays.fill(heldDie, false);
+            Arrays.fill(heldDie, false);
 
-                   i = i + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2 then it is
-                    // now the third roll.
+            //System.out.println("i inside of do before i increments by one:"+rollNumber);
 
-                   // int h = 0;
-                    System.out.println("How many dice would you like to set aside? (This is amount of dice, not the " +
-                            "dice themselves.");
-                   int desiredHeldDie = reRoll.nextInt();
+            rollNumber = rollNumber + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2
+            // then it is now the third roll.
 
+            //System.out.println("i inside of do after i increments by one:"+rollNumber);
 
-                    for (int h=0;h<=desiredHeldDie;h++) {
-                        System.out.println("Which dice would you like to set aside? (This is the actual dice, not the " +
-                                "amount of dice you want to set aside.");
-                        int hold2 = reRoll.nextInt();
-                        heldDie[hold2-1]=true;
-                        h = h+1;
-                    }
+            // int h = 0;
+            System.out.println("How many dice would you like to set aside? (This is amount of dice, not the " +
+                    "dice themselves.");
+            int desiredHeldDie = reRoll.nextInt();
+
+            if (desiredHeldDie>5) {
+                throw new IllegalArgumentException(
+                        "For the safety of our game of Yahtzee, trying to enter a \nvalue >5 here is dangerous and " +
+                                "would crash the game if you managed to get past this message when entering a value >5. \n\nTL " +
+                                "DR: Don't enter a number >5.");
+            }
+
+            for (int h = 1; h < (desiredHeldDie + 1); h++) {
+                System.out.println("Which dice would you like to set aside? (This is the actual dice, not the " +
+                        "amount of dice you want to set aside.");
+                int hold2 = reRoll.nextInt();
+
+                if (hold2>5) {
+                    throw new IllegalArgumentException(
+                            "For the safety of our game of Yahtzee, trying to enter a \nvalue >5 here is dangerous " +
+                                    "and would crash the game if you managed to get past this message when entering " +
+                                    "a value >5. \n\nTL DR:Don't enter a number >5.");
+                }
+
+                heldDie[hold2 - 1] = true;
+            }
 
 
 //                    System.out.println("Please enter the number for the dice you want to set aside for the next roll " +
@@ -209,18 +234,20 @@ heldDie[4] = false;
 ////                        for(reRollDice ("0"));
 ////                    }
 
-                    answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
+            answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
 
-                }
-                else if (reRollDice.equalsIgnoreCase("no")) {
-                    i = 3; //sets the roll count to 3,
-                    answeredCorrectly=true; //releases the user from the answeredCorrectly 'loop'
+        } else if (reRollDice.equalsIgnoreCase("no")) {
+            rollNumber = 3; //sets the roll count to 3,
+            answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
 
-                } else {
-                    System.out.println("This is a yes/no question. Please respond with \"yes\" or \"no\".");
-                    answeredCorrectly = false;
-                }
-            } while(!answeredCorrectly);
+        } else {
+            System.out.println("This is a yes/no question. Please respond with \"yes\" or \"no\".");
+            answeredCorrectly = false;
+        }
+
+    } while (!answeredCorrectly);
+}
+           // System.out.println("i at end of loop:"+rollNumber);
 
         }
 //need to call up the Rules class to calculate the score for the round
@@ -229,4 +256,4 @@ heldDie[4] = false;
         }
 
 
-}
+//}
