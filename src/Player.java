@@ -8,8 +8,10 @@ public class Player {
     private int score;
     private boolean isPlaying = true;
     private Die[] dice;
+    private Rules rules;
  //   private boolean diceHeld;
  //   private int finalScore;
+Scanner chose = new Scanner(System.in);
 
     //initializes constructors, getters, setters, and the array that holds the dice.
     public Player(String name) {
@@ -17,6 +19,7 @@ public class Player {
         dice = new Die[5];
         for(int i = 0; i<dice.length;i++){
             dice[i] = new Die();
+            rules = new Rules(this);
             //need to have each Player Object hold it's own score so that when all 13 rounds are over for each player,
             // a winner can be calculated and declared.
         }
@@ -152,9 +155,18 @@ heldDie[4] = false;
 
             System.out.println(" ");
 
-            boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
-            // if they would like to re-roll, but it will keep them here unless they answer yes or no.
-
+    boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
+    // if they would like to re-roll, but it will keep them here unless they answer yes or no.
+//            if (rollNumber==2) {
+//                answeredCorrectly = true;
+//            }
+//if (rollNumber<2) {
+//    answeredCorrectly = false;
+//}
+//else {
+//    answeredCorrectly = true;
+//}
+            //need to figure out how to solve the two bugs that cause confusion within the user interface during a turn.
     do {
         System.out.println("Would you like to roll again?");
         String reRollDice = reRoll.nextLine();
@@ -164,10 +176,13 @@ heldDie[4] = false;
             Arrays.fill(heldDie, false);
 
             //System.out.println("i inside of do before i increments by one:"+rollNumber);
-
-            rollNumber = rollNumber + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2
-            // then it is now the third roll.
-
+//         if (rollNumber<2) {
+             rollNumber = rollNumber + 1; //increases roll count by 1. If i=1 then it is now the second roll, and if i=2
+             // then it is now the third roll.
+//         }
+//         else {
+//             //answeredCorrectly = true;
+//         }
             //System.out.println("i inside of do after i increments by one:"+rollNumber);
 
             // int h = 0;
@@ -240,13 +255,26 @@ heldDie[4] = false;
             rollNumber = 3; //sets the roll count to 3,
             answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
 
-        } else {
+        }
+//        else if (reRollDice.equalsIgnoreCase("no")&&rollNumber=2) {
+//            rollNumber = 3; //sets the roll count to 3,
+//            answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
+//
+//        }
+
+
+        else {
             System.out.println("This is a yes/no question. Please respond with \"yes\" or \"no\".");
             answeredCorrectly = false;
         }
 
-    } while (!answeredCorrectly);
+    } while (!answeredCorrectly)/*||if(rollNumber<2)*/;
 }
+System.out.println("placeholder text for when choosing what category to score roll under.");
+        System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes.");
+        //below line is supposed to call the instance of the Rules class that the current player has, and then
+        //calculate the score of the roll before starting the next player's turn.
+//rules.checkCategory();
            // System.out.println("i at end of loop:"+rollNumber);
 
         }
