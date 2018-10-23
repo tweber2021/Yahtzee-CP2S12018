@@ -76,6 +76,58 @@ public class Rules {
         return false;
     }
 
+    private boolean checkLower(Die[] dice, int value) {
+        for(int i=0;i<(dice.length-2);i++){
+            if((dice[i]==dice[i+1]&&dice[i+1]==dice[i+2]&&dice[i]==dice[i+2])){
+                return true;
+            }
+            else{
+                return false;}
+        }
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        for (Die mFaceValue: dice) {
+            if (mFaceValue.getFaceValue() == value) {
+                return true;
+            }}
+        return false;
+    }*/
+
+    private boolean presetCheckCategoryLower(Die[] dice, int value) {
+        for (int i=0; i <= 6; i++) {
+
+            boolean[] checkingLowerSection = new boolean[7];
+            int[] matchLowerSection = new int[7];
+
+
+            for (Die mFaceValue: dice) {
+                if (mFaceValue.getFaceValue() ==)
+                    value = matchLowerSection[i];
+
+            if (checkingLowerSection[i] == true) {
+
+                checkingLowerSection[i] =
+                }
+            }
+            }
+
+        }
+
+
     // Just to clarify if the category is available for use, if false it is
     // the return value may look switched but default was set to check as long as its default it can be used.
     public boolean checkCategory(int pValue) {
@@ -90,7 +142,10 @@ public class Rules {
 
     }
 
-    private int sumDice(Die[] dice, int value){
+
+
+
+    public int sumDice(Die[] dice, int value){
 
 
         // The subtotal will be 0, until returned with the new faceValue
