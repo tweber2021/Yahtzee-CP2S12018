@@ -35,66 +35,41 @@ public class Yahtzee {
         }
 
         // ------------------------------------------------------------------------------------------------------ //
-        static void checkIntInput(String prompt) throws InputMismatchException {
-            int output = 0;
-          try{
-             output = promptInt(prompt);
-          }
-          catch (InputMismatchException e){
-              System.out.println("You did not use a valid number\nPlease try again");
-              checkIntInput(prompt);
-            }
 
-        }
-
-        static int promptInt(String prompt) throws InputMismatchException{
+        public static int promptInt(String prompt) throws InputMismatchException{
+            System.out.print(prompt+" ");
                 Scanner sc = new Scanner(System.in);
-                //boolean success = false;
-                int output = 0;
-                String response;
-                //while(!success) {
-                    System.out.print(prompt + " ");
-                    //success = true; // Allow user input to pass unless exception occurs.
-                     //response = sc.nextLine();
-                     //output = (Integer.parseInt(response);
+                int output;
                     try{
                       output = sc.nextInt();
                     }
                     catch (InputMismatchException e){
-                        System.err.println("You have not entered a valid integer.");
-                        output = 0;
+                        output = -1; // Set the output to -1 if an error is found
                     }
-
-                        //System.err.println("You have not entered a valid integer.");
-                       // success = false;
-                //}
-
 
                 return output;
         }
 
-
-
-        static String promptString(String prompt){
+        public static String promptString(String prompt){
                 Scanner sc = new Scanner(System.in);
                 System.out.print(prompt+" ");
                 return sc.nextLine();
         }
 
-        static boolean anyPlaying(Player players[]){
+        private static boolean anyPlaying(Player players[]){
                 for(int i=0;i<players.length;i++){
                         if(players[i].getIsPlaying()){return true;}
                 }
                 return false;
         }
 
-        static void printFinalScores(Player players[]){
+        private static void printFinalScores(Player players[]){
                 for(int i=0;i<players.length;i++){
                         System.out.println(players[i].getName()+": "+players[i].getScore()+" pts.");
                 }
         }
 
-        static String getWinnerName(Player players[]){
+        private static String getWinnerName(Player players[]){
                 int winner = 0; // Replaced if "Player 0" does not win
                 for(int i=0;i<players.length;i++){
                         if(players[i].getScore() > players[winner].getScore()){winner = i;}
