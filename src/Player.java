@@ -11,7 +11,6 @@ public class Player {
     private Rules rules;
  //   private boolean diceHeld;
  //   private int finalScore;
-Scanner chose = new Scanner(System.in);
 
     //initializes constructors, getters, setters, and the array that holds the dice.
     public Player(String name) {
@@ -20,6 +19,7 @@ Scanner chose = new Scanner(System.in);
         for(int i = 0; i<dice.length;i++){
             dice[i] = new Die();
             rules = new Rules(this);
+            //isPlaying is no longer needed with an update to the Yahtzee Class.
             //need to have each Player Object hold it's own score so that when all 13 rounds are over for each player,
             // a winner can be calculated and declared.
         }
@@ -73,6 +73,7 @@ Scanner chose = new Scanner(System.in);
 
         Scanner reRoll = new Scanner(System.in); //scanner used to ask the player if they want to re-roll the dice
         // after an initial or previous roll on their current turn.
+        Scanner chose = new Scanner(System.in);
 
         //code TODO in next build of player class
         //ask the player after rolling which dice they would like to set aside by having them type a number 1 through 5
@@ -271,12 +272,20 @@ heldDie[4] = false;
     } while (!answeredCorrectly)/*||if(rollNumber<2)*/;
 }
 System.out.println("placeholder text for when choosing what category to score roll under.");
-        System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes.");
+        System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes\n7=3OfAKind\n8=4OfAKind\n9=SmallStraight\n10=LargeStraight\n11=FullHouse\n12=Yahtzee\n13=Chance");
+        int choseCategory = chose.nextInt();
         //below line is supposed to call the instance of the Rules class that the current player has, and then
         //calculate the score of the roll before starting the next player's turn.
-//rules.checkCategory();
+rules.checkCategoryInput(choseCategory);
            // System.out.println("i at end of loop:"+rollNumber);
-
+//for(int turnsTaken = 0; turnsTaken < 14; turnsTaken++) {
+//    if (turnsTaken <13) {
+//        turnsTaken = turnsTaken +1;
+//    }
+//    else if (turnsTaken == 13) {
+//
+//    }
+//}
         }
 //need to call up the Rules class to calculate the score for the round
        // return getScore();

@@ -49,6 +49,56 @@ public class Rules {
 
     public boolean checkCategoryInput(int chose) {
         if(checkCategory(chose-1)){
+            switch (chose) {
+            //case 1 is Aces
+            case(1): checkUpper;
+
+            //case 2 is Twos
+            case(2): checkUpper;
+
+            //case 3 is Threes
+            case(3): checkUpper;
+
+            //case 4 is Fours
+            case'4': checkUpper;
+
+            //case 5 is Fives
+            case(5): checkUpper;
+
+            //case 6 is Sixes
+            case(6): checkUpper;
+
+            break;
+
+            //case 7 is ThreeOfAKind
+            case(7): checkMatch(3);
+            break;
+
+            //case 8 is FourOfAKind
+            case(8): checkMatch(4);
+            break;
+
+            //case 9 is SmallStraight
+            case(9):
+            break;
+
+            //case 10 is LargeStraight
+            case(10):
+            break;
+
+            //case 11 is FullHouse
+            case(11): checkMatch(2) && checkMatch(3) && !checkMatch(5) //not sure if i need the !checkMatch(5)
+            break;
+
+            //case 12 is Yahtzee
+            case(12): checkMatch(5);
+            break;
+
+            //case 13 is Chance
+            case(13):
+            break;
+
+             }
             if(chose<7 && chose>0){
                 if(checkUpper(player.getDice(),chose)){
                     categoryScore[chose-1] = sumDice(player.getDice(),chose);
@@ -57,11 +107,15 @@ public class Rules {
                 }
             }
             else{
+
+
+
                 //todo lowersection
                 return true;
             }
 
         }
+
         return false;
     }
 
@@ -79,14 +133,22 @@ public class Rules {
     private boolean checkLower(Die[] dice, int value) {
         for(int i=0;i<(dice.length-2);i++){
             if((dice[i]==dice[i+1]&&dice[i+1]==dice[i+2]&&dice[i]==dice[i+2])){
-                return true;
-            }
-            else{
-                return false;}
-        }
-        return false;
+        return true;
     }
+            else{
+        return false;}
+}
+        return false;
+                }
 
+//                private boolean checkMatch(Die[] dice, int value) {
+//                    if (dice[]) {
+//                        return true;
+//                    }
+//                    else {
+//                        return false;
+//                    }
+//                }
 
 
 
@@ -107,25 +169,25 @@ public class Rules {
         return false;
     }*/
 
-    private boolean presetCheckCategoryLower(Die[] dice, int value) {
-        for (int i=0; i <= 6; i++) {
-
-            boolean[] checkingLowerSection = new boolean[7];
-            int[] matchLowerSection = new int[7];
-
-
-            for (Die mFaceValue: dice) {
-                if (mFaceValue.getFaceValue() ==)
-                    value = matchLowerSection[i];
-
-            if (checkingLowerSection[i] == true) {
-
-                checkingLowerSection[i] =
-                }
-            }
-            }
-
-        }
+//    private boolean presetCheckCategoryLower(Die[] dice, int value) {
+//        for (int i=0; i <= 6; i++) {
+//
+//            boolean[] checkingLowerSection = new boolean[7];
+//            int[] matchLowerSection = new int[7];
+//
+//
+//            for (Die mFaceValue: dice) {
+//                if (mFaceValue.getFaceValue() ==)
+//                    value = matchLowerSection[i];
+//
+//            if (checkingLowerSection[i] == true) {
+//
+//                checkingLowerSection[i] =
+//                }
+//            }
+//            }
+//
+//        }
 
 
     // Just to clarify if the category is available for use, if false it is
