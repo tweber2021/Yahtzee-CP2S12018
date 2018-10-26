@@ -6,7 +6,6 @@ public class Player {
     //initializes variables
     private String name;
     private int score;
-    private boolean isPlaying = true;
     private Die[] dice;
     private Rules rules;
  //   private boolean diceHeld;
@@ -33,11 +32,6 @@ Scanner chose = new Scanner(System.in);
         return dice;
     }
 
-  //  public void setDice(Die[] dice) {this.dice = dice;}
-
-    public Player(boolean isPlaying) {
-        this.isPlaying = isPlaying;
-    }
 
  //   public Player(int finalScore) {this.finalScore = finalScore;}
 
@@ -51,9 +45,6 @@ Scanner chose = new Scanner(System.in);
 
     public String getName() {
         return this.name;
-    }
-    public boolean getIsPlaying() {
-        return this.isPlaying;
     }
 
  /*   public boolean getDiceHeld() {
@@ -116,7 +107,7 @@ heldDie[4] = false;
        // if (rollNumber<2) { //should not ask player if they want to roll again after last roll.
         //System.out.println("i initial:"+i);
 
-        String playersTurnPhrase = "It is now player " + getName() + "'s turn.";
+        String playersTurnPhrase = "It is now " + getName() + "'s turn.";
             System.out.println(playersTurnPhrase); //returns the name of the player who's
         // turn it is
         for(int i = 0; i<playersTurnPhrase.length();i++) {
@@ -150,9 +141,8 @@ heldDie[4] = false;
             } */
 
 
-            System.out.println("You Rolled: " + dice[0].getFaceValue() + " " + dice[1].getFaceValue() + " " +
-                    dice[2].getFaceValue() + " " + dice[3].getFaceValue() + " " + dice[4].getFaceValue());
-
+            System.out.println("You Rolled: ");
+            printDice(dice);
             System.out.println(" ");
 
     boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
@@ -167,8 +157,8 @@ heldDie[4] = false;
 //    answeredCorrectly = true;
 //}
             //need to figure out how to solve the two bugs that cause confusion within the user interface during a turn.
-    do {
-        System.out.println("Would you like to roll again?");
+    if(rollNumber<2){do {
+        System.out.println("Would you like to roll again?\n");
         String reRollDice = reRoll.nextLine();
 
         if (reRollDice.equalsIgnoreCase("yes")) {
@@ -268,7 +258,8 @@ heldDie[4] = false;
             answeredCorrectly = false;
         }
 
-    } while (!answeredCorrectly)/*||if(rollNumber<2)*/;
+    } while (!answeredCorrectly)/*||if(rollNumber<2)*/;}
+    else{rollNumber++;}
 }
 System.out.println("placeholder text for when choosing what category to score roll under.");
         System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes.");
@@ -280,8 +271,40 @@ System.out.println("placeholder text for when choosing what category to score ro
         }
 //need to call up the Rules class to calculate the score for the round
        // return getScore();
-
+private String asciiDie(int faceValue){ // Creates graphical representation of dice
+            switch (faceValue){
+                case 1: return "┍━━━━━━━┑\n" +
+                        "│      │\n" +
+                        "│   *  │\n" +
+                        "│      │\n" +
+                        "┕━━━━━━━┙";
+                case 2: return "┍━━━━━━━┑\n" +
+                        "│*     │\n" +
+                        "│      │\n" +
+                        "│     *│\n" +
+                        "┕━━━━━━━┙";
+                case 3: return "┍━━━━━━━┑\n" +
+                        "│*     │\n" +
+                        "│   *  │\n" +
+                        "│     *│\n" +
+                        "┕━━━━━━━┙";
+                case 4: return "┍━━━━━━━┑\n" +
+                        "│*    *│\n" +
+                        "│      │\n" +
+                        "│*    *│\n" +
+                        "┕━━━━━━━┙";
+                case 5: return "┍━━━━━━━┑\n" +
+                        "│*    *│\n" +
+                        "│   *  │\n" +
+                        "│*    *│\n" +
+                        "┕━━━━━━━┙";
+            }
+    return  "[x]"; // Error
+}
+    private void printDice(Die[] dice){
+        for(int i=0;i<dice.length;i++){
+            System.out.println(asciiDie(dice[i].getFaceValue()));
+            //System.out.print(dice[i].getFaceValue()+" ");
         }
-
-
-//}
+    }
+        }
