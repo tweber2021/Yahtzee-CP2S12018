@@ -48,56 +48,73 @@ public class Rules {
     // We check that category off by turning it true so it is not re usable
 
     public boolean checkCategoryInput(int chose) {
-        if(checkCategory(chose-1)){
+        if(!checkCategory(chose-1)){
+
             switch (chose) {
             //case 1 is Aces
-            case(1): checkUpper;
+            case(1):
+                System.out.println("Test 1");//checkUpper;
 
             //case 2 is Twos
-            case(2): checkUpper;
+            case(2):
+                System.out.println("Test 2");//checkUpper;
 
             //case 3 is Threes
-            case(3): checkUpper;
+            case(3):
+                System.out.println("Test 3");//checkUpper;
 
             //case 4 is Fours
-            case'4': checkUpper;
+            case(4):
+                System.out.println("Test 4");//checkUpper;
 
             //case 5 is Fives
-            case(5): checkUpper;
+            case(5):
+                System.out.println("Test 5");//checkUpper;
 
             //case 6 is Sixes
-            case(6): checkUpper;
+            case(6):
+                System.out.println("Test 6");//checkUpper;
 
             break;
 
             //case 7 is ThreeOfAKind
-            case(7): checkMatch(3);
+            case(7):
+                System.out.println("Test 7");//checkMatch(3);
             break;
 
             //case 8 is FourOfAKind
-            case(8): checkMatch(4);
+            case(8):
+                System.out.println("Test 8");//checkMatch(4);
             break;
 
             //case 9 is SmallStraight
             case(9):
+                System.out.println("Test 9");
             break;
 
             //case 10 is LargeStraight
             case(10):
+                System.out.println("Test 10");
             break;
 
             //case 11 is FullHouse
-            case(11): checkMatch(2) && checkMatch(3) && !checkMatch(5) //not sure if i need the !checkMatch(5)
+            case(11):
+                System.out.println("Test 11");//checkMatch(2) && checkMatch(3) && !checkMatch(5); //not sure if i need the !checkMatch(5)
             break;
 
             //case 12 is Yahtzee
-            case(12): checkMatch(5);
+            case(12):
+                System.out.println("Test 12");//checkMatch(5);
             break;
 
             //case 13 is Chance
             case(13):
+                System.out.println("Test 13");
             break;
 
+            default:
+                System.out.println("Invalid number or faulty code.");
+                break;
              }
             if(chose<7 && chose>0){
                 if(checkUpper(player.getDice(),chose)){

@@ -73,7 +73,7 @@ public class Player {
 
         Scanner reRoll = new Scanner(System.in); //scanner used to ask the player if they want to re-roll the dice
         // after an initial or previous roll on their current turn.
-        Scanner chose = new Scanner(System.in);
+        Scanner chose1 = new Scanner(System.in);
 
         //code TODO in next build of player class
         //ask the player after rolling which dice they would like to set aside by having them type a number 1 through 5
@@ -271,12 +271,14 @@ heldDie[4] = false;
 
     } while (!answeredCorrectly)/*||if(rollNumber<2)*/;
 }
+while (!rules.checkCategory())
 System.out.println("placeholder text for when choosing what category to score roll under.");
         System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes\n7=3OfAKind\n8=4OfAKind\n9=SmallStraight\n10=LargeStraight\n11=FullHouse\n12=Yahtzee\n13=Chance");
-        int choseCategory = chose.nextInt();
+        int chose = chose1.nextInt();
         //below line is supposed to call the instance of the Rules class that the current player has, and then
         //calculate the score of the roll before starting the next player's turn.
-rules.checkCategoryInput(choseCategory);
+        System.out.println("The answer after running the category check from the rules: "+ rules.checkCategoryInput(chose));
+rules.checkCategoryInput(chose);
            // System.out.println("i at end of loop:"+rollNumber);
 //for(int turnsTaken = 0; turnsTaken < 14; turnsTaken++) {
 //    if (turnsTaken <13) {
