@@ -143,7 +143,7 @@ heldDie[4] = false;
 
             System.out.println("You Rolled: ");
             printDice(dice);
-            System.out.println(" ");
+            System.out.println();
 
     boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
     // if they would like to re-roll, but it will keep them here unless they answer yes or no.
@@ -271,40 +271,67 @@ System.out.println("placeholder text for when choosing what category to score ro
         }
 //need to call up the Rules class to calculate the score for the round
        // return getScore();
-private String asciiDie(int faceValue){ // Creates graphical representation of dice
-            switch (faceValue){
-                case 1: return "┍━━━━━━━┑\n" +
-                        "│      │\n" +
-                        "│   *  │\n" +
-                        "│      │\n" +
-                        "┕━━━━━━━┙";
-                case 2: return "┍━━━━━━━┑\n" +
-                        "│*     │\n" +
-                        "│      │\n" +
-                        "│     *│\n" +
-                        "┕━━━━━━━┙";
-                case 3: return "┍━━━━━━━┑\n" +
-                        "│*     │\n" +
-                        "│   *  │\n" +
-                        "│     *│\n" +
-                        "┕━━━━━━━┙";
-                case 4: return "┍━━━━━━━┑\n" +
-                        "│*    *│\n" +
-                        "│      │\n" +
-                        "│*    *│\n" +
-                        "┕━━━━━━━┙";
-                case 5: return "┍━━━━━━━┑\n" +
-                        "│*    *│\n" +
-                        "│   *  │\n" +
-                        "│*    *│\n" +
-                        "┕━━━━━━━┙";
+
+    private void printDice(Die[] dice){ // Prints graphical representation of dice in a row
+        String[] printRows = new String[5]; // We need rows because we want the dice to be all in a row.
+        Arrays.fill(printRows,""); // Init. array
+        for(int i=0;i<5;i++) {
+            if(dice[i].getFaceValue()<1||dice[i].getFaceValue()>6){printRows[2]+="[!]";} // No graphical representation of the faceValue found
+
+            // These are some pretty ugly dice; the output window just can't display the fancy unicode dice.
+            // But hey, at least I got them all to display in a row.
+            switch (dice[i].getFaceValue()) {
+                case 1:
+                    printRows[0]+="-------";
+                    printRows[1]+="|     |";
+                    printRows[2]+="|  o  |";
+                    printRows[3]+="|     |";
+                    printRows[4]+="-------";
+                    break;
+                case 2:
+                    printRows[0]+="-------";
+                    printRows[1]+="|    o|";
+                    printRows[2]+="|     |";
+                    printRows[3]+="|o    |";
+                    printRows[4]+="-------";
+                    break;
+                case 3:
+                    printRows[0]+="-------";
+                    printRows[1]+="|    o|";
+                    printRows[2]+="|  o  |";
+                    printRows[3]+="|o    |";
+                    printRows[4]+="-------";
+                    break;
+                case 4:
+                    printRows[0]+="-------";
+                    printRows[1]+="|o   o|";
+                    printRows[2]+="|     |";
+                    printRows[3]+="|o   o|";
+                    printRows[4]+="-------";
+                    break;
+                case 5:
+                    printRows[0]+="-------";
+                    printRows[1]+="|o   o|";
+                    printRows[2]+="|  o  |";
+                    printRows[3]+="|o   o|";
+                    printRows[4]+="-------";
+                    break;
+                case 6:
+                    printRows[0]+="-------";
+                    printRows[1]+="|o   o|";
+                    printRows[2]+="|o   o|";
+                    printRows[3]+="|o   o|";
+                    printRows[4]+="-------";
+                    break;
             }
-    return  "[x]"; // Error
-}
-    private void printDice(Die[] dice){
-        for(int i=0;i<dice.length;i++){
-            System.out.println(asciiDie(dice[i].getFaceValue()));
-            //System.out.print(dice[i].getFaceValue()+" ");
+            printRows[0]+=" ";
+            printRows[1]+=" ";
+            printRows[2]+=" "; // S p a c i n g  between the dice
+            printRows[3]+=" ";
+            printRows[4]+=" ";
+        }
+        for(int i=0;i<5;i++){
+            System.out.println(printRows[i]);
         }
     }
-        }
+}
