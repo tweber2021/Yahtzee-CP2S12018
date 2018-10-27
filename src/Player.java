@@ -107,13 +107,13 @@ heldDie[4] = false;
        // if (rollNumber<2) { //should not ask player if they want to roll again after last roll.
         //System.out.println("i initial:"+i);
 
-        String playersTurnPhrase = "It is now " + getName() + "'s turn.";
+        String playersTurnPhrase = getName() + "'s Turn";
             System.out.println(playersTurnPhrase); //returns the name of the player who's
         // turn it is
         for(int i = 0; i<playersTurnPhrase.length();i++) {
-            System.out.print("_");
+            System.out.print("‾");
         }
-        System.out.println("");
+        System.out.println();
 
 
         while(rollNumber<=2) { //while the variable i is less than or equal to 2 (i=0 is the first/initial roll.),
@@ -141,7 +141,7 @@ heldDie[4] = false;
             } */
 
 
-            System.out.println("You Rolled: ");
+            System.out.println(getName()+" rolled: ");
             printDice(dice);
             System.out.println();
 
@@ -276,62 +276,27 @@ System.out.println("placeholder text for when choosing what category to score ro
         String[] printRows = new String[5]; // We need rows because we want the dice to be all in a row.
         Arrays.fill(printRows,""); // Init. array
         for(int i=0;i<5;i++) {
-            if(dice[i].getFaceValue()<1||dice[i].getFaceValue()>6){printRows[2]+="[!]";} // No graphical representation of the faceValue found
+            int faceVal = dice[i].getFaceValue(); // Stored so we don't need to keep calling the method
+            if(faceVal<1||faceVal>6){printRows[2]+="[!]";} // No graphical representation of the faceValue found
 
-            // These are some pretty ugly dice; the output window just can't display the fancy unicode dice.
-            // But hey, at least I got them all to display in a row.
-            switch (dice[i].getFaceValue()) {
-                case 1:
-                    printRows[0]+="-------";
-                    printRows[1]+="|     |";
-                    printRows[2]+="|  o  |";
-                    printRows[3]+="|     |";
-                    printRows[4]+="-------";
-                    break;
-                case 2:
-                    printRows[0]+="-------";
-                    printRows[1]+="|    o|";
-                    printRows[2]+="|     |";
-                    printRows[3]+="|o    |";
-                    printRows[4]+="-------";
-                    break;
-                case 3:
-                    printRows[0]+="-------";
-                    printRows[1]+="|    o|";
-                    printRows[2]+="|  o  |";
-                    printRows[3]+="|o    |";
-                    printRows[4]+="-------";
-                    break;
-                case 4:
-                    printRows[0]+="-------";
-                    printRows[1]+="|o   o|";
-                    printRows[2]+="|     |";
-                    printRows[3]+="|o   o|";
-                    printRows[4]+="-------";
-                    break;
-                case 5:
-                    printRows[0]+="-------";
-                    printRows[1]+="|o   o|";
-                    printRows[2]+="|  o  |";
-                    printRows[3]+="|o   o|";
-                    printRows[4]+="-------";
-                    break;
-                case 6:
-                    printRows[0]+="-------";
-                    printRows[1]+="|o   o|";
-                    printRows[2]+="|o   o|";
-                    printRows[3]+="|o   o|";
-                    printRows[4]+="-------";
-                    break;
-            }
-            printRows[0]+=" ";
-            printRows[1]+=" ";
-            printRows[2]+=" "; // S p a c i n g  between the dice
-            printRows[3]+=" ";
-            printRows[4]+=" ";
+            // In order to compress the code, I've thought of a way to make all of the dice in the same five lines.
+            // The presence of a dot on a point on the die can be expressed as a boolean value.
+            // We can use this to our advantage by creating a method that returns either a space or an o.
+            // Some dots on the die are shared between different faces, creating different conditions for them to appear.
+
+            //printRows[0]+="---"+faceVal+"--- "; // DEBUG (it works!)
+            printRows[0]+=" _____  ";
+            printRows[1]+="|"+boolDot(faceVal!=1)+"   "+boolDot(faceVal>3)+"| ";
+            printRows[2]+="|"+boolDot(faceVal==6)+" "+boolDot(faceVal%2==1)+" "+boolDot(faceVal==6)+"| ";
+            printRows[3]+="|"+boolDot(faceVal>3)+"   "+boolDot(faceVal>1)+"| ";
+            printRows[4]+=" ‾‾‾‾‾  ";
         }
         for(int i=0;i<5;i++){
             System.out.println(printRows[i]);
         }
+    }
+
+    private String boolDot(boolean condition){ // If the condition is true, return a "dot" to be put on the die.
+       if(condition){return "o";} else{return " ";}
     }
 }
