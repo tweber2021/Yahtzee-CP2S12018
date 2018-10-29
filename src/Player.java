@@ -277,7 +277,7 @@ System.out.println("placeholder text for when choosing what category to score ro
         int chose = chose1.nextInt();
         //below line is supposed to call the instance of the Rules class that the current player has, and then
         //calculate the score of the roll before starting the next player's turn.
-        System.out.println("The answer after running the category check from the rules: "+ rules.checkCategoryInput(chose));
+        //System.out.println("The answer after running the category check from the rules: "+ rules.checkCategoryInput(chose));
 rules.checkCategoryInput(chose);
            // System.out.println("i at end of loop:"+rollNumber);
 //for(int turnsTaken = 0; turnsTaken < 14; turnsTaken++) {

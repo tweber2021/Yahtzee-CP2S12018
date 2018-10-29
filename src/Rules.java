@@ -51,64 +51,77 @@ public class Rules {
         if(!checkCategory(chose-1)){
 
             switch (chose) {
-            //case 1 is Aces
-            case(1):
-                System.out.println("Test 1");//checkUpper;
-
-            //case 2 is Twos
-            case(2):
-                System.out.println("Test 2");//checkUpper;
-
-            //case 3 is Threes
-            case(3):
-                System.out.println("Test 3");//checkUpper;
-
-            //case 4 is Fours
-            case(4):
-                System.out.println("Test 4");//checkUpper;
-
-            //case 5 is Fives
-            case(5):
-                System.out.println("Test 5");//checkUpper;
-
-            //case 6 is Sixes
-            case(6):
-                System.out.println("Test 6");//checkUpper;
-
-            break;
+//            //case 1 is Aces
+//            case(1):
+//                //test print lines were for testing.
+//               /* System.out.println("Test 1");*/ checkUpper(i,1);
+//
+//            //case 2 is Twos
+//            case(2):
+//                //test print lines were for testing.
+//               /* System.out.println("Test 2");*/ checkUpper(i,2);
+//
+//            //case 3 is Threes
+//            case(3):
+//                //test print lines were for testing.
+//               /* System.out.println("Test 3");*/ checkUpper(i,3);
+//
+//            //case 4 is Fours
+//            case(4):
+//                //test print lines were for testing.
+//               /* System.out.println("Test 4");*/ checkUpper(i,4);
+//
+//            //case 5 is Fives
+//            case(5):
+//                //test print lines were for testing.
+//              /*  System.out.println("Test 5");*/ checkUpper(i,5);
+//
+//            //case 6 is Sixes
+//            case(6):
+//                //test print lines were for testing.
+//               /* System.out.println("Test 6");*/ checkUpper(i,6);
+//
+//            break;
 
             //case 7 is ThreeOfAKind
             case(7):
-                System.out.println("Test 7");//checkMatch(3);
+                //test print lines were for testing.
+                /*System.out.println("Test 7");*/ checkMatch([i]= 0 [i+1]= 1 [i+2]= 2 [i+3]=3 [i+4]=4, 3);
             break;
 
             //case 8 is FourOfAKind
             case(8):
-                System.out.println("Test 8");//checkMatch(4);
+                //test print lines were for testing.
+               /* System.out.println("Test 8");*/ checkMatch(i,4);
             break;
 
             //case 9 is SmallStraight
             case(9):
+                //test print lines were for testing.
                 System.out.println("Test 9");
             break;
 
             //case 10 is LargeStraight
             case(10):
+                //test print lines were for testing.
                 System.out.println("Test 10");
             break;
 
             //case 11 is FullHouse
             case(11):
-                System.out.println("Test 11");//checkMatch(2) && checkMatch(3) && !checkMatch(5); //not sure if i need the !checkMatch(5)
+                //test print lines were for testing.
+               /* System.out.println("Test 11");*/checkMatch(i, 2) && checkMatch(i, 3); //not sure if i need the !checkMatch(5)
             break;
 
             //case 12 is Yahtzee
             case(12):
+                //test print lines were for testing.
                 System.out.println("Test 12");//checkMatch(5);
             break;
 
             //case 13 is Chance
             case(13):
+                //test print lines were for testing.
                 System.out.println("Test 13");
             break;
 
@@ -167,8 +180,34 @@ public class Rules {
 //                    }
 //                }
 
-
-
+    private int checkMatch(Die[] dice, int numberOfDice) {
+        switch (numberOfDice) {
+            case 2:
+                for (int i = 0; i < (dice.length - 3); i++) {
+                    if ((dice[i] == dice[i + 1])) {
+                        categoryScore[6] = sumDice(dice);
+                        checkLowerSector[6] = true;
+                    }
+                        break;
+                }
+                    case 3:
+                        for (int i = 0; i < (dice.length - 2); i++) {
+                            if ((dice[i] == dice[i + 1] && dice[i + 1] == dice[i + 2] && dice[i] == dice[i + 2])) {
+                                categoryScore[7] = sumDice(dice);
+                                checkLowerSector[7] = true;
+                                break;
+                            }
+                        }
+                    case 4:
+                        for (int i = 0; i < (dice.length - 1); i++) {
+                            if ((dice[i] == dice[i + 1] && dice[i + 1] == dice[i + 2] && dice[i] == dice[i + 2] && dice[i] == dice[i + 3])) {
+                                //1 to 2, 2 to 3, 1 to 3, 1 to 4, --2 to 4--, --3 to 4--
+                                categoryScore[8] = sumDice(dice);
+                                checkLowerSector[8] = true;
+                            }
+                        }
+        }
+    }
 
 
 
