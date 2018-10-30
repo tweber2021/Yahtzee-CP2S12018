@@ -18,11 +18,12 @@ public class Player {
         dice = new Die[5];
         for(int i = 0; i<dice.length;i++){
             dice[i] = new Die();
-            rules = new Rules(this);
+
             //isPlaying is no longer needed with an update to the Yahtzee Class.
             //need to have each Player Object hold it's own score so that when all 13 rounds are over for each player,
             // a winner can be calculated and declared.
         }
+        rules = new Rules(this);
 
         /*for(Die die: dice){
             die.
@@ -257,11 +258,7 @@ heldDie[4] = false;
             answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
 
         }
-//        else if (reRollDice.equalsIgnoreCase("no")&&rollNumber=2) {
-//            rollNumber = 3; //sets the roll count to 3,
-//            answeredCorrectly = true; //releases the user from the answeredCorrectly 'loop'
-//
-//        }
+
 
 
         else {
@@ -271,14 +268,23 @@ heldDie[4] = false;
 
     } while (!answeredCorrectly)/*||if(rollNumber<2)*/;
 }
-while (!rules.checkCategory())
+
 System.out.println("placeholder text for when choosing what category to score roll under.");
-        System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes\n7=3OfAKind\n8=4OfAKind\n9=SmallStraight\n10=LargeStraight\n11=FullHouse\n12=Yahtzee\n13=Chance");
-        int chose = chose1.nextInt();
-        //below line is supposed to call the instance of the Rules class that the current player has, and then
-        //calculate the score of the roll before starting the next player's turn.
-        //System.out.println("The answer after running the category check from the rules: "+ rules.checkCategoryInput(chose));
-rules.checkCategoryInput(chose);
+       int chose = 0;
+
+
+           while (chose < 1 || chose > 13) {
+               System.out.println("Please choose one of the following categories.");
+               System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes\n7=3OfAKind\n8=4OfAKind\n9=SmallStraight\n10=LargeStraight\n11=FullHouse\n12=Yahtzee\n13=Chance");
+               chose = chose1.nextInt();
+                System.out.println("The category check method for kicking out of the while loop: "+ (!rules.checkCategory(chose)));
+               while(!rules.checkCategory(chose)){
+                   rules.checkCategoryInput(dice, chose);
+           }
+
+
+
+       }
            // System.out.println("i at end of loop:"+rollNumber);
 //for(int turnsTaken = 0; turnsTaken < 14; turnsTaken++) {
 //    if (turnsTaken <13) {

@@ -48,92 +48,105 @@ public class Rules {
     // We check that category off by turning it true so it is not re usable
 
     public boolean checkCategoryInput(Die [] dice, int chose) {
-        if(!checkCategory(chose-1)){
+        if (!checkCategory(chose - 1)) {
 
             switch (chose) {
-           //case 1 is Aces
-           case(1):
-           case(2):
-           case(3):
-           case(4):
-           case(5):
-           case(6):
-              if(checkUpper(dice, chose)){
-                  categoryScore[chose-1] = sumDice(dice,chose);
-                  categoryCheck[chose-1] = true;
-              }
-               return categoryCheck[chose-1];
+                //case 1 is Aces
+                case (1):
+                case (2):
+                case (3):
+                case (4):
+                case (5):
+                case (6):
+                    if (checkUpper(dice, chose)) {
+                        categoryScore[chose - 1] = sumDice(dice, chose);
+                        categoryCheck[chose - 1] = true;
+                    }
+                    System.out.println(categoryCheck[chose - 1]);
+                    return categoryCheck[chose - 1];
 
 
-            //case 7 is ThreeOfAKind
-            case(7):
-                //test print lines were for testing.
-                /*System.out.println("Test 7");*/ return checkMatch(dice, 3);
+                //case 7 is ThreeOfAKind
+                case (7):
+                    //test print lines were for testing.
+                    /*System.out.println("Test 7");*/
+                    System.out.println(checkMatch(dice, 3));
+                    return checkMatch(dice, 3);
 
 
-            //case 8 is FourOfAKind
-            case(8):
-                //test print lines were for testing.
-               /* System.out.println("Test 8");*/ return checkMatch(dice,4);
+                //case 8 is FourOfAKind
+                case (8):
+                    //test print lines were for testing.
+                    /* System.out.println("Test 8");*/
+                    System.out.println(checkMatch(dice, 4));
+                    return checkMatch(dice, 4);
 
 
-            //case 9 is SmallStraight
-            case(9):
-                //test print lines were for testing.
-               /* System.out.println("Test 9"); */
-            break;
+                //case 9 is SmallStraight
+                case (9):
+                    //test print lines were for testing.
+                     System.out.println("Test 9");
+                     return true;
 
-            //case 10 is LargeStraight
-            case(10):
-                //test print lines were for testing.
-               /* System.out.println("Test 10"); */
-            break;
 
-            //case 11 is FullHouse
-            case(11):
-                //test print lines were for testing.
-               /* System.out.println("Test 11");*/
-                if(checkMatch(dice, 2) &&
-                        checkMatch(dice, 3)){
-            return true;
-                }
-                //not sure if i need the !checkMatch(5)
-            break;
-
-            //case 12 is Yahtzee
-            case(12):
-                //test print lines were for testing.
-               /* System.out.println("Test 12");*/ return checkMatch(dice, 5);
-            break;
-
-            //case 13 is Chance
-            case(13): return sumDice(dice,chose);
-                //test print lines were for testing.
-                System.out.println("Test 13");
-            break;
-
-            default:
-                System.out.println("Invalid number or faulty code.");
-                break;
-             }
-            if(chose<7 && chose>0){
-                if(checkUpper(player.getDice(),chose)){
-                    categoryScore[chose-1] = sumDice(player.getDice(),chose);
-                    categoryCheck[chose-1] = true;
+                //case 10 is LargeStraight
+                case (10):
+                    //test print lines were for testing.
+                     System.out.println("Test 10");
                     return true;
-                }
+
+                //case 11 is FullHouse
+                case (11):
+                    //test print lines were for testing.
+                    /* System.out.println("Test 11");*/
+                    if (checkMatch(dice, 2) &&
+                            checkMatch(dice, 3)) {
+                        System.out.println("this works.");
+                        return true;
+                    }
+                    //not sure if i need the !checkMatch(5)
+                    break;
+
+                //case 12 is Yahtzee
+                case (12):
+                    //test print lines were for testing.
+                    /* System.out.println("Test 12");*/
+                    System.out.println(checkMatch(dice, 5));
+                    return checkMatch(dice, 5);
+//case 12 crashes the game, not good.
+
+                //case 13 is Chance
+                case (13):
+                    sumDice(dice, chose);
+                    System.out.println(sumDice(dice, chose));
+                    return true;
+                //test print lines were for testing.
+              /*  System.out.println("Test 13"); */
+
+
+                default:
+                    System.out.println("Invalid number or faulty code.");
+                    break;
             }
-            else{
+//            if (chose < 7 && chose > 0) {
+//                if (checkUpper(player.getDice(), chose)) {
+//                    categoryScore[chose - 1] = sumDice(player.getDice(), chose);
+//                    categoryCheck[chose - 1] = true;
+//                    return true;
+//                }
+//            } else {
+//
+//
+//                //todo lowersection
+//                return true;
+//            }
 
-
-
-                //todo lowersection
-                return true;
-            }
-
+        } else {
+            return false;
         }
 
         return false;
+
     }
 
     //This goes throw each dice, so it will loop 5 times checking each value and setting it
@@ -172,36 +185,42 @@ public class Rules {
             case 2:
                 for (int i = 0; i < (dice.length - 3); i++) {
                     if ((dice[i] == dice[i + 1])) {
-                        categoryScore[6] = sumDice(dice);
-                        checkLowerSector[6] = true;
+                        categoryScore[11] = 20; //20 is a test value
+                    //    checkLowerSector[11] = true;
                     }
-                    break;
                 }
+                break;
+
             case 3:
                 for (int i = 0; i < (dice.length - 2); i++) {
                     if ((dice[i] == dice[i + 1] && dice[i + 1] == dice[i + 2] && dice[i] == dice[i + 2])) {
-                        categoryScore[7] = sumDice(dice);
-                        checkLowerSector[7] = true;
-                        break;
+                        categoryScore[7] = 30; //30 is a test value
+                    //    checkLowerSector[7] = true;
                     }
                 }
+                break;
+
             case 4:
                 for (int i = 0; i < (dice.length - 1); i++) {
                     if ((dice[i] == dice[i + 1] && dice[i + 1] == dice[i + 2] && dice[i] == dice[i + 2] && dice[i] == dice[i + 3] && dice[i + 1] == dice[i + 3] && dice[i + 2] == dice[i + 3])) {
                         //1 to 2, 2 to 3, 1 to 3, 1 to 4, --2 to 4--, --3 to 4--
-                        categoryScore[8] = sumDice(dice);
-                        checkLowerSector[8] = true;
+                        categoryScore[8] = 40; //40 is a test value
+                    //    checkLowerSector[8] = true;
                     }
                 }
+                break;
+
             case 5:
                 for (int i = 0; i < (dice.length); i++) {
                     if ((dice[i] == dice[i + 1] && dice[i + 1] == dice[i + 2] && dice[i] == dice[i + 2] && dice[i] == dice[i + 3] && dice[i + 1] == dice[i + 3] && dice[i + 2] == dice[i + 3] && dice[i] == dice[i + 4] && dice[i + 1] == dice[i + 4] && dice[i + 2] == dice[i + 4] && dice[i + 3] == dice[i + 4])) {
                         //1 to 2, 2 to 3, 1 to 3, 1 to 4, --2 to 4--, --3 to 4--
-                        categoryScore[12] = sumDice(dice);
-                        checkLowerSector[12] = true;
+                        categoryScore[12] = 50; //50 is a test value
+                    //    checkLowerSector[12] = true;
                     }
                 }
+                break;
         }
+        return true;
     }
 
 
