@@ -48,7 +48,7 @@ public class Rules {
     // We check that category off by turning it true so it is not re usable
 
     public boolean checkCategoryInput(Die [] dice, int chose) {
-        if (!checkCategory(chose - 1)) {
+        if (!checkCategory(chose)) {
 
             switch (chose) {
                 //case 1 is Aces
@@ -62,7 +62,11 @@ public class Rules {
                         categoryScore[chose - 1] = sumDice(dice, chose);
                         categoryCheck[chose - 1] = true;
                     }
-                    System.out.println(categoryCheck[chose - 1]);
+                    else{
+                        categoryScore[chose - 1] = 0;
+                        categoryCheck[chose - 1] = true;
+                    }
+                    //System.out.println(categoryCheck[chose - 1]);
                     return categoryCheck[chose - 1];
 
 
@@ -99,8 +103,8 @@ public class Rules {
                 case (11):
                     //test print lines were for testing.
                     /* System.out.println("Test 11");*/
-                    if (checkMatch(dice, 2) &&
-                            checkMatch(dice, 3)) {
+                    if (checkMatch(dice, 3) &&
+                            checkMatch(dice, 2)) {
                         System.out.println("this works.");
                         return true;
                     }
@@ -264,10 +268,10 @@ public class Rules {
     // the return value may look switched but default was set to check as long as its default it can be used.
     public boolean checkCategory(int pValue) {
         int fixedNumber;
-        if (pValue < 1 || pValue > 12) {
+        if (pValue < 1 || pValue > 13) {
             return false;
         } else {
-            return categoryCheck[pValue];
+            return categoryCheck[pValue-1];
         }
 
 
