@@ -8,7 +8,7 @@ public class Player {
     private String name;
     private int score;
     private Die[] dice;
-    private Rules rules;
+   private Rules rules;
  //   private boolean diceHeld;
  //   private int finalScore;
 Scanner chose = new Scanner(System.in);
@@ -19,7 +19,7 @@ Scanner chose = new Scanner(System.in);
         dice = new Die[5];
         for(int i = 0; i<dice.length;i++){
             dice[i] = new Die();
-            rules = new Rules(this);
+           rules = new Rules(this);
             //need to have each Player Object hold it's own score so that when all 13 rounds are over for each player,
             // a winner can be calculated and declared.
         }
@@ -138,7 +138,8 @@ Arrays.fill(heldDie,false);
 
 
             System.out.println("\n"+getName()+" rolled: ");
-            printDice(dice);
+            // printDice(dice); (Temporarily disabled for incompatibility issues)
+            printDice2(dice); // Temporary fix
             System.out.println();
 
     boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
@@ -267,7 +268,12 @@ System.out.println("placeholder text for when choosing what category to score ro
 //need to call up the Rules class to calculate the score for the round
        // return getScore();
 
+    private static void printDice2(Die[] dice){
+        for(int i=0;i<5;i++){System.out.print(dice[i].getFaceValue()+" ");}
+    }
+
     private static void printDice(Die[] dice){ // Prints graphical representation of dice in a row
+
         String[] printRows = new String[5]; // We need rows because we want the dice to be all in a row.
         Arrays.fill(printRows,""); // Init. array
         for(int i=0;i<5;i++) {
@@ -283,11 +289,11 @@ System.out.println("placeholder text for when choosing what category to score ro
 
             // - Text Dice Creation -
             //printRows[0]+="---"+faceVal+"--- "; // DEBUG (it works!)
-            printRows[0]+=" _____  ";
-            printRows[1]+="|"+boolDot(faceVal!=1)+"   "+boolDot(faceVal>3)+"| ";
-            printRows[2]+="|"+boolDot(faceVal==6)+" "+boolDot(faceVal%2==1)+" "+boolDot(faceVal==6)+"| ";
-            printRows[3]+="|"+boolDot(faceVal>3)+"   "+boolDot(faceVal>1)+"| ";
-            printRows[4]+=" ‾‾‾‾‾  ";
+            //printRows[0]+=" ______  ";
+            printRows[1]+=boolDot(faceVal!=1)+"   "+boolDot(faceVal>3)+"     ";
+            printRows[2]+=boolDot(faceVal==6)+" "+boolDot(faceVal%2==1)+" "+boolDot(faceVal==6)+"     ";
+            printRows[3]+=boolDot(faceVal>3)+"   "+boolDot(faceVal>1)+"     ";
+            //printRows[4]+=" ‾‾‾‾‾‾‾‾  ";
         }
         for(int i=0;i<5;i++){
             System.out.println(printRows[i]);
@@ -342,7 +348,7 @@ System.out.println("placeholder text for when choosing what category to score ro
 
     private static boolean inIntArr(int query,int[] arr){
         for(int i=0;i<arr.length;i++){
-            if(arr[i]==query){;return true;}
+            if(arr[i]==query){return true;}
         }
         return false;
     }
