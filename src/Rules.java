@@ -1,6 +1,5 @@
-import java.lang.reflect.WildcardType;
-
 public class Rules {
+
 
     private boolean[] Scoring;
     private int totalScore;
@@ -240,128 +239,44 @@ public class Rules {
                 // subTotal will be greater or equals to faceValue then
                 subTotal += facevalue;
             }
-        }
 
+    // Methods for straight scoring only
 
-        // subTotal is switched from 0 to the new score of the 5 dices
-        return subTotal;
-
-
-    }
-
-
-    /*// Back to category check, when a category is checked by a successful method, we will return it to true.
-    public int checkScore(int[] dice) {
-
-
-        // Now getting this. (certain category, looks into each one until it finds categoryCheck[0-12]
-        // Will check the score if 0 return the dice to the player and either end or next turn created by Player
-        for (int i = 0; i < this.categoryCheck.length; i++) {
-
-
-            // if category is false categoryCheck[i=false]      { return dice; to player
-            if (categoryCheck[i]) {
-
-
-                // Now giving the player the dice back since they cant do anything with it
-                return dice;
-
-
-                // This is part 1 of 2 of checking, with this part were grabbing the dice for whichever upper/lower section they selected
-                // Once it goes throughout the code for the upper/lower sectioned game rules code, and if they scored an actual score
-                // Then we will flip the category from false to true for the selection they chose
-
-
-                // ------ This section still needs tweaked and fixed a little ------
-            } else if (checkUpper()) {
-
-
-                // Category check is now switched to true
-                categoryCheck[0] = true;
-
-
-                // Category Score is done in the part 2 of 2, which is called checkDie
-
-                // Doing the same thing as checkUpper but for checking checkTwos die requirements
-                // Will be done during beta
+    private static int scoreStraight(boolean large, Die[] dice){
+        int score = 0;
+        boolean scored = false;
+        if(large){ // Large straight
+            for(int ofs = 0;ofs < 2; ofs++) { // Large straights have two possible sets of integers to look for
+                scored = true;
+                for (int i = 1+ofs; i < 6+ofs; i++) { // Iterate to all 5 dice
+                    if (!inDice(dice, i)) { // Check for the existence of iterated numbers
+                        scored = false;
+                    }
+                }
             }
-
-            }}
-            return dice;
-
+            if(scored){return 40;}
         }
-*/
-
-
-
-    // Getting int[0-12] and a new value to add up the (sub) total, not initial score (These are where the 5 dices are placed and checked)
-
-
-
-
-
-    //Checking the real score from the dice values
-   /*  public void checkDieRealScore (Die[] dice){
-
-
-        // Created new diceValue now is this.players score, then getting the score to return to diceValue
-        int NewDvalue = this.player.setScore();
-        int diceValue = this.player.getScore();
-
-        // now checking part 2 of 2 of upper section and lower later, getting the dice score which whatever value is needed
-        for(int i = 1; i<=6;i++){
-        if (checkUpper(dice, i)) {
-
-
-            //Trying to get the 5 dice and
-            diceValue += sumDice(dice,i);
-            // diceValue now equals the amount of dices that equalled a one, so 1-5, and this score will be set into the categoryScore[0] later
-
-            //New
-            //NewDvalue += totalDice()
-
-
-
+        else{ // Small straight
+            for(int ofs = 0;ofs < 3; ofs++) { // Small straights have three possible sets of integers to look for
+                scored = true;
+                for (int i = 1+ofs; i < 5+ofs; i++) { // Iterate to four dice
+                    if (!inDice(dice, i)) { // Check for the existence of iterated numbers
+                        scored = false;
+                    }
+                }
+            }
+            if(scored){return 30;}
         }
-        }
-
-        this.player.setScore(diceValue);
-
-        // Gets the new diceValue depending on which check method was chosen and how many dice landed or scored that
-
-    }*/
-
-
-        // mFaceValue is a temporary hold for holding class Die's Die array
-
-
-
-    //Lower section will be worked on during beta
-
-
-        // Grabbing how many dices rolled on that number
-    // Will be different for lower section
-    public void calculatePlayerScore(){
-        int subtotal = 0;
-        for(int value: categoryScore){
-            subtotal += value;
-        }
-        totalScore = subtotal;
-
+        return 0;
     }
 
+    // Check for the existence of a certain faceValue in the dice array
+    private static boolean inDice(Die[] dice, int query){
+        for(int i=0;i<dice.length;i++){
+            if(dice[i].getFaceValue()==query){return true;}
 
-
-
-    // Just returning the total score from each category score
-
-    public boolean[] getScoring() {
-        return Scoring;
-    }
-    public int getTotalScore() {
-        return totalScore;
-
+        }
+        return false;
     }
 
 }
-

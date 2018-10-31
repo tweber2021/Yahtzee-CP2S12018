@@ -22,9 +22,9 @@ public class Yahtzee {
                 System.out.println();
 
                 // Gameplay loop
-                while(anyPlaying(players)){ // While anyone is playing, allow players to take their turn only if they are playing
+                for(int turns=0;turns<13;turns++){ // While anyone is playing, allow players to take their turn only if they are playing
                        for(int p=0;p<totalPlayers;p++){
-                              if(players[p].getIsPlaying()){players[p].takeTurn();}
+                              players[p].takeTurn();
                        }
                 }
 
@@ -54,13 +54,6 @@ public class Yahtzee {
                 Scanner sc = new Scanner(System.in);
                 System.out.print(prompt+" ");
                 return sc.nextLine();
-        }
-
-        private static boolean anyPlaying(Player players[]){
-                for(int i=0;i<players.length;i++){
-                        if(players[i].getIsPlaying()){return true;}
-                }
-                return false;
         }
 
         private static void printFinalScores(Player players[]){
