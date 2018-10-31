@@ -7,13 +7,18 @@ public class Rules {
     private int[] categoryScore;
     private boolean[] categoryCheck;
     private Player player;
+    private boolean[] checkLowerSector = new boolean[7];
 
+    public boolean[] getCategoryCheck() {
+        return categoryCheck;
+    }
 
     // Player class holds a play from its class, then will grab this.player to be specifice to correctly grabbing the right player
     // categoryCheck is a new 13 array list, the index is 0-12 however, but we have the program set all to false.
     public Rules(Player player) {
         this.player = player;
         categoryCheck = new boolean[13];
+
 
 
 /*      For later on
@@ -28,16 +33,14 @@ public class Rules {
 */
 
 
-            //Creating categoryScore to 13 new int's 0-12 in index form
-            // We use I as an index just to replicate a for () for temp use in this method
-            categoryScore = new int[13];
-            for (int i = 0; i < categoryScore.length; i++) {
-                categoryScore[i] = 0;
-            }
+        //Creating categoryScore to 13 new int's 0-12 in index form
+        // We use I as an index just to replicate a for () for temp use in this method
+        categoryScore = new int[13];
+        for (int i = 0; i < categoryScore.length; i++) {
+            categoryScore[i] = 0;
+        }
 
     }
-
-
 
 
     // This is getting the chose category and checking it
@@ -48,19 +51,25 @@ public class Rules {
     // We check that category off by turning it true so it is not re usable
 
     public boolean checkCategoryInput(int chose) {
-        if(checkCategory(chose-1)){
-            if(chose<7 && chose>0){
-                if(checkUpper(player.getDice(),chose)){
-                    categoryScore[chose-1] = sumDice(player.getDice(),chose);
-                    categoryCheck[chose-1] = true;
+        if (checkCategory(chose - 1)) {
+            if (chose < 7 && chose > 0) {
+                if (checkUpper(player.getDice(), chose)) {
+                    categoryScore[chose - 1] = sumDice(player.getDice(), chose);
+                    categoryCheck[chose - 1] = true;
                     return true;
                 }
-            }
-            else{
-                //todo lowersection
+            } else {{
+                for (int i=1; i <= 7; i++)
+                    if (checkCategory(chose - 1))
+                        if (checkLowerSector[i] = true) {
+                    categoryCheck[7] = d
+                }
+                    {
+                    }
+                }
+
                 return true;
             }
-
         }
         return false;
     }
@@ -69,36 +78,95 @@ public class Rules {
     // as long as certain values match up will count them as score but is depended on the category that's selected.
 
     private boolean checkUpper(Die[] dice, int value) {
-        for (Die mFaceValue: dice) {
+        for (Die mFaceValue : dice) {
             if (mFaceValue.getFaceValue() == value) {
                 return true;
-            }}
-        return false;
-    }
-
-    private boolean checkLower(Die[] dice, int value) {
-        for(int i=0;i<(dice.length-2);i++){
-            if((dice[i]==dice[i+1]&&dice[i+1]==dice[i+2]&&dice[i]==dice[i+2])){
-                return true;
             }
-            else{
-                return false;}
         }
         return false;
     }
 
 
+    private boolean checkMatch(Die[] dice, int numberOfDice) {
 
+        switch (numberOfDice) {
+            case 1:
+                boolean[] checkChance = new boolean[1];
+                    if (checkChance[1] == true) {
+                        return false;
+                    } else {
+                        checkLowerSector[4] = true;
+                        return true;
+                }
+            case 2:
+                for (int i = 0; i <= (dice.length); i++) {
+                    for (int a = 0; a <= (dice.length); i++) {
+                        if ((dice[i] == dice[i + a])) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            case 3:
+                for (int i = 0; i < dice.length; i++) { //3 of kind
+                    for (int a = 0; a < dice.length; a++) {
+                        for (int b = 0; b < dice.length; b++) {
+                            if (dice[i] == dice[a] &&
+                                    dice[i] == dice[b] &&
+                                    dice[a] == dice[b]);
+                            checkLowerSector[1] = true;
+                            return true;
+                        }
+                    }
+                }
+            case 4: //chance is 13 category
+                boolean[] checkYahtzee = new boolean[1];
+                if (checkYahtzee[1] = false) {
+                for (int i = 0; i < 5; i++) { //4 of kind
+                    for (int a = 0; a < 5; a++) {
+                        for (int b = 0; b < 5; b++) {
+                            for (int c = 0; c < 5; c++) {
+                                if (dice[i] == dice[a] &&
+                                        dice[i] == dice[b] &&
+                                        dice[i] == dice[c] &&
+                                        dice[a] == dice[b] &&
+                                        dice[a] == dice[c] &&
+                                        dice[b] == dice[c]) ;
+                                checkLowerSector[2] = true;
+                                return true;
+                            }
+                        }
+                        }
+                    }
 
+                }
+            case 5:
 
-
-
-
-
-
-
-
-
+                for (int i = 0; i < 5; i++) { //5 of kind
+                    for (int a = 0; a < 5; a++) {
+                        for (int b = 0; b < 5; b++) {
+                            for (int c = 0; c < 5; c++) {
+                                for (int e = 0; e < 5; e++) {
+                                    if (dice[i] == dice[a] &&
+                                            dice[i] == dice[b] &&
+                                            dice[i] == dice[c] &&
+                                            dice[i] == dice[e] &&
+                                            dice[a] == dice[b] &&
+                                            dice[a] == dice[c] &&
+                                            dice[a] == dice[e] &&
+                                            dice[b] == dice[c] &&
+                                            dice[b] == dice[e] &&
+                                            dice[c] == dice[e]) ;
+                                    checkLowerSector[3] = true;
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+        return false;
+    }
         /*
         for (Die mFaceValue: dice) {
             if (mFaceValue.getFaceValue() == value) {
@@ -107,7 +175,7 @@ public class Rules {
         return false;
     }*/
 
-    private boolean presetCheckCategoryLower(Die[] dice, int value) {
+  /*  private boolean presetCheckCategoryLower(Die[] dice, int value) {
         for (int i=0; i <= 6; i++) {
 
             boolean[] checkingLowerSection = new boolean[7];
@@ -125,7 +193,7 @@ public class Rules {
             }
             }
 
-        }
+        } */
 
 
     // Just to clarify if the category is available for use, if false it is
@@ -143,7 +211,16 @@ public class Rules {
     }
 
 
+    public int sumDice(Die[] dice){
+            int subTotal = 0;
 
+            // facevalue is getting the dice now
+            for (Die die : dice) {
+                subTotal += die.getFaceValue();
+
+            }
+            return subTotal;
+        }
 
     public int sumDice(Die[] dice, int value){
 
