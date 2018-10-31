@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -6,9 +7,8 @@ public class Player {
     //initializes variables
     private String name;
     private int score;
-    private boolean isPlaying = true;
     private Die[] dice;
-    private Rules rules;
+   private Rules rules;
  //   private boolean diceHeld;
  //   private int finalScore;
 Scanner chose = new Scanner(System.in);
@@ -19,7 +19,7 @@ Scanner chose = new Scanner(System.in);
         dice = new Die[5];
         for(int i = 0; i<dice.length;i++){
             dice[i] = new Die();
-            rules = new Rules(this);
+           rules = new Rules(this);
             //need to have each Player Object hold it's own score so that when all 13 rounds are over for each player,
             // a winner can be calculated and declared.
         }
@@ -33,11 +33,6 @@ Scanner chose = new Scanner(System.in);
         return dice;
     }
 
-  //  public void setDice(Die[] dice) {this.dice = dice;}
-
-    public Player(boolean isPlaying) {
-        this.isPlaying = isPlaying;
-    }
 
  //   public Player(int finalScore) {this.finalScore = finalScore;}
 
@@ -51,9 +46,6 @@ Scanner chose = new Scanner(System.in);
 
     public String getName() {
         return this.name;
-    }
-    public boolean getIsPlaying() {
-        return this.isPlaying;
     }
 
  /*   public boolean getDiceHeld() {
@@ -85,12 +77,7 @@ Scanner chose = new Scanner(System.in);
 
 
 boolean [] heldDie = new boolean[5];
-
-heldDie[0] = false;
-heldDie[1] = false;
-heldDie[2] = false;
-heldDie[3] = false;
-heldDie[4] = false;
+Arrays.fill(heldDie,false);
 
    /* private boolean[] getHeldDie(boolean [] pHeldDie) {
         return pHeldDie;
@@ -116,13 +103,13 @@ heldDie[4] = false;
        // if (rollNumber<2) { //should not ask player if they want to roll again after last roll.
         //System.out.println("i initial:"+i);
 
-        String playersTurnPhrase = "It is now player " + getName() + "'s turn.";
+        String playersTurnPhrase = getName() + "'s Turn";
             System.out.println(playersTurnPhrase); //returns the name of the player who's
         // turn it is
         for(int i = 0; i<playersTurnPhrase.length();i++) {
-            System.out.print("_");
+            System.out.print("‾");
         }
-        System.out.println("");
+        System.out.println();
 
 
         while(rollNumber<=2) { //while the variable i is less than or equal to 2 (i=0 is the first/initial roll.),
@@ -150,10 +137,10 @@ heldDie[4] = false;
             } */
 
 
-            System.out.println("You Rolled: " + dice[0].getFaceValue() + " " + dice[1].getFaceValue() + " " +
-                    dice[2].getFaceValue() + " " + dice[3].getFaceValue() + " " + dice[4].getFaceValue());
-
-            System.out.println(" ");
+            System.out.println("\n"+getName()+" rolled: ");
+            // printDice(dice); (Temporarily disabled for incompatibility issues)
+            printDice2(dice); // Temporary fix
+            System.out.println();
 
     boolean answeredCorrectly = false; //initializes answeredCorrectly to false. this is used to ask the player
     // if they would like to re-roll, but it will keep them here unless they answer yes or no.
@@ -167,8 +154,8 @@ heldDie[4] = false;
 //    answeredCorrectly = true;
 //}
             //need to figure out how to solve the two bugs that cause confusion within the user interface during a turn.
-    do {
-        System.out.println("Would you like to roll again?");
+    if(rollNumber<2){do {
+        System.out.print("Would you like to roll again? ");
         String reRollDice = reRoll.nextLine();
 
         if (reRollDice.equalsIgnoreCase("yes")) {
@@ -185,32 +172,31 @@ heldDie[4] = false;
 //         }
             //System.out.println("i inside of do after i increments by one:"+rollNumber);
 
-            // int h = 0;
-            System.out.println("How many dice would you like to set aside? (This is amount of dice, not the " +
-                    "dice themselves.");
-            int desiredHeldDie = reRoll.nextInt();
-
-            if (desiredHeldDie>5) {
-                throw new IllegalArgumentException(
-                        "For the safety of our game of Yahtzee, trying to enter a \nvalue >5 here is dangerous and " +
-                                "would crash the game if you managed to get past this message when entering a value >5. \n\nTL " +
-                                "DR: Don't enter a number >5.");
+            /*int desiredHeldDie = -1;
+            while(desiredHeldDie>5||desiredHeldDie<1){
+                desiredHeldDie=promptInt("How many dice would you like to set aside? (This is amount of dice, not the " +
+                        "dice themselves.");
             }
 
             for (int h = 1; h < (desiredHeldDie + 1); h++) {
-                System.out.println("Which dice would you like to set aside? (This is the actual dice, not the " +
+                int hold2=-1;
+                while(hold2>5||hold2<1){
+                hold2 = promptInt("[Die "+h+"] Which dice would you like to set aside? (This is the actual dice, not the " +
                         "amount of dice you want to set aside.");
-                int hold2 = reRoll.nextInt();
-
-                if (hold2>5) {
-                    throw new IllegalArgumentException(
-                            "For the safety of our game of Yahtzee, trying to enter a \nvalue >5 here is dangerous " +
-                                    "and would crash the game if you managed to get past this message when entering " +
-                                    "a value >5. \n\nTL DR:Don't enter a number >5.");
                 }
 
                 heldDie[hold2 - 1] = true;
+            }*/
+
+            int[] desiredHeldDice = new int[1]; desiredHeldDice[0]=-1; // Initialize array to loop state (resized later)
+            while(desiredHeldDice[0]==-1){
+            desiredHeldDice = promptIntList("Which dice would you like to set aside? (Separated by commas. Dice are ordered 1-5.)");
+            for(int h=1;h<6;h++){
+                if(inIntArr(h,desiredHeldDice)){heldDie[h-1]=true;}
+                 }
             }
+
+
 
 
 //                    System.out.println("Please enter the number for the dice you want to set aside for the next roll " +
@@ -268,7 +254,8 @@ heldDie[4] = false;
             answeredCorrectly = false;
         }
 
-    } while (!answeredCorrectly)/*||if(rollNumber<2)*/;
+    } while (!answeredCorrectly)/*||if(rollNumber<2)*/;}
+    else{rollNumber++;}
 }
 System.out.println("placeholder text for when choosing what category to score roll under.");
         System.out.println("1=Aces\n2=Twos\n3=Threes\n4=Fours\n5=Fives\n6=Sixes.");
@@ -276,12 +263,94 @@ System.out.println("placeholder text for when choosing what category to score ro
         //calculate the score of the roll before starting the next player's turn.
 //rules.checkCategory();
            // System.out.println("i at end of loop:"+rollNumber);
-
+        System.out.println();
         }
 //need to call up the Rules class to calculate the score for the round
        // return getScore();
 
+    private static void printDice2(Die[] dice){
+        for(int i=0;i<5;i++){System.out.print(dice[i].getFaceValue()+" ");}
+    }
+
+    private static void printDice(Die[] dice){ // Prints graphical representation of dice in a row
+
+        String[] printRows = new String[5]; // We need rows because we want the dice to be all in a row.
+        Arrays.fill(printRows,""); // Init. array
+        for(int i=0;i<5;i++) {
+            int faceVal = dice[i].getFaceValue(); // Stored so we don't need to keep calling the method
+            if(faceVal<1||faceVal>6){printRows[2]+="[!]";} // No graphical representation of the faceValue found
+
+            /* ___________________________________________________________________________________________________________
+              |In order to compress the code, I've thought of a way to make all of the dice in the same five lines.       |
+              |The presence of a dot on a point on the die can be expressed as a boolean value.                           |
+              |We can use this to our advantage by creating a method that returns either a space or a dot.                |
+              |Some dots on the die are shared between different faces, creating different conditions for them to appear. |
+               ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ */
+
+            // - Text Dice Creation -
+            //printRows[0]+="---"+faceVal+"--- "; // DEBUG (it works!)
+            //printRows[0]+=" ______  ";
+            printRows[1]+=boolDot(faceVal!=1)+"   "+boolDot(faceVal>3)+"     ";
+            printRows[2]+=boolDot(faceVal==6)+" "+boolDot(faceVal%2==1)+" "+boolDot(faceVal==6)+"     ";
+            printRows[3]+=boolDot(faceVal>3)+"   "+boolDot(faceVal>1)+"     ";
+            //printRows[4]+=" ‾‾‾‾‾‾‾‾  ";
+        }
+        for(int i=0;i<5;i++){
+            System.out.println(printRows[i]);
+        }
+    }
+
+    private static String boolDot(boolean condition){ // If the condition is true, return a "dot" to be put on the die.
+       if(condition){return "●";} else{return " ";}
+    }
+
+    // promptInt also checks for invalid inputs
+    private static int promptInt(String prompt) throws InputMismatchException {
+        Scanner sc = new Scanner(System.in);
+        int output;
+        try{
+            output = sc.nextInt();
+        }
+        catch (InputMismatchException e){
+            output = -1; // Set the output to -1 if an error is found
         }
 
+        return output;
+    }
 
-//}
+    private static int[] promptIntList(String prompt) throws InputMismatchException{
+        System.out.print(prompt+" ");
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        int items = 1;
+        for(int i=0;i<input.length();i++){if(input.substring(i,i+1).equals(",")){items++;}} // Count up the number of items in the list
+        int[] output = new int[items];
+        for(int i=0;i<items;i++){
+            try{output[i]=Integer.parseInt(fetchParam(input,i));} // Error checking
+            catch(Exception e){Arrays.fill(output,-1);return output;}
+        }
+        return output;
+    }
+
+    private static String fetchParam(String str, int index){
+        int currentIndex = 0;
+        int lastDelimPos = -1;
+        int i;
+        for(i=0;i<str.length();i++){
+            if(str.substring(i,i+1).equals(",")){
+                if(currentIndex==index){return str.substring(lastDelimPos+1,i);}
+                currentIndex++;
+                lastDelimPos=i;
+            }
+        }
+        return str.substring(lastDelimPos+1,i);
+    }
+
+    private static boolean inIntArr(int query,int[] arr){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==query){return true;}
+        }
+        return false;
+    }
+
+}
