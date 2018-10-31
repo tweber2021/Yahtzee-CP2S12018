@@ -49,28 +49,112 @@ public class Rules {
     // Now were setting the score for chosen category and making it there score which is sumDice that holds the score
     // We check that category off by turning it true so it is not re usable
 
-    public boolean checkCategoryInput(int chose) {
-        if (checkCategory(chose - 1)) {
-            if (chose < 7 && chose > 0) {
-                if (checkUpper(player.getDice(), chose)) {
-                    categoryScore[chose - 1] = sumDice(player.getDice(), chose);
-                    categoryCheck[chose - 1] = true;
-                    return true;
-                }
-            } else {{
-                for (int i=1; i <= 7; i++)
-                    if (checkCategory(chose - 1))
-                        if (checkLowerSector[i] = true) {
-                    categoryCheck[7] = d
-                }
-                    {
-                    }
-                }
 
-                return true;
+    public boolean checkCategoryInput(Die [] dice, int chose) {
+        if (!checkCategory(chose)) {
+
+            switch (chose) {
+                //case 1 is Aces
+                case (1):
+                case (2):
+                case (3):
+                case (4):
+                case (5):
+                case (6):
+                    if (checkUpper(dice, chose)) {
+                        categoryScore[chose - 1] = sumDice(dice, chose);
+                        categoryCheck[chose - 1] = true;
+                    }
+                    else{
+                        categoryScore[chose - 1] = 0;
+                        categoryCheck[chose - 1] = true;
+                    }
+                    //System.out.println(categoryCheck[chose - 1]);
+                    return categoryCheck[chose - 1];
+
+
+                //case 7 is ThreeOfAKind
+                case (7):
+                    //test print lines were for testing.
+                    /*System.out.println("Test 7");*/
+                    System.out.println(checkMatch(dice, 3));
+                    return checkMatch(dice, 3);
+
+
+                //case 8 is FourOfAKind
+                case (8):
+                    //test print lines were for testing.
+                    /* System.out.println("Test 8");*/
+                    System.out.println(checkMatch(dice, 4));
+                    return checkMatch(dice, 4);
+
+
+                //case 9 is SmallStraight
+                case (9):
+                    //test print lines were for testing.
+                     System.out.println("Test 9");
+                     return true;
+
+
+                //case 10 is LargeStraight
+                case (10):
+                    //test print lines were for testing.
+                     System.out.println("Test 10");
+                    return true;
+
+                //case 11 is FullHouse
+                case (11):
+                    //test print lines were for testing.
+                    /* System.out.println("Test 11");*/
+                    if (checkMatch(dice, 3) &&
+                            checkMatch(dice, 2)) {
+                        System.out.println("this works.");
+                        return true;
+                    }
+                    //not sure if i need the !checkMatch(5)
+                    break;
+
+                //case 12 is Yahtzee
+                case (12):
+                    //test print lines were for testing.
+                    /* System.out.println("Test 12");*/
+                    System.out.println(checkMatch(dice, 5));
+                    return checkMatch(dice, 5);
+//case 12 crashes the game, not good.
+
+                //case 13 is Chance
+                case (13):
+                    sumDice(dice, chose);
+                    System.out.println(sumDice(dice, chose));
+                    return true;
+                //test print lines were for testing.
+              /*  System.out.println("Test 13"); */
+
+
+                default:
+                    System.out.println("Invalid number or faulty code.");
+                    break;
             }
+//            if (chose < 7 && chose > 0) {
+//                if (checkUpper(player.getDice(), chose)) {
+//                    categoryScore[chose - 1] = sumDice(player.getDice(), chose);
+//                    categoryCheck[chose - 1] = true;
+//                    return true;
+//                }
+//            } else {
+//
+//
+//                //todo lowersection
+//                return true;
+//            }
+
+        } else {
+            return false;
+
         }
+
         return false;
+
     }
 
     //This goes throw each dice, so it will loop 5 times checking each value and setting it
@@ -80,6 +164,7 @@ public class Rules {
         for (Die mFaceValue : dice) {
             if (mFaceValue.getFaceValue() == value) {
                 return true;
+
             }
         }
         return false;
@@ -166,6 +251,7 @@ public class Rules {
         }
         return false;
     }
+
         /*
         for (Die mFaceValue: dice) {
             if (mFaceValue.getFaceValue() == value) {
@@ -173,6 +259,7 @@ public class Rules {
             }}
         return false;
     }*/
+
 
   /*  private boolean presetCheckCategoryLower(Die[] dice, int value) {
         for (int i=0; i <= 6; i++) {
@@ -195,14 +282,15 @@ public class Rules {
         } */
 
 
+
     // Just to clarify if the category is available for use, if false it is
     // the return value may look switched but default was set to check as long as its default it can be used.
     public boolean checkCategory(int pValue) {
         int fixedNumber;
-        if (pValue < 1 || pValue > 12) {
+        if (pValue < 1 || pValue > 13) {
             return false;
         } else {
-            return categoryCheck[pValue];
+            return categoryCheck[pValue-1];
         }
 
 
