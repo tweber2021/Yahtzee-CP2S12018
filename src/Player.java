@@ -109,11 +109,11 @@ public class Player {
         //System.out.println("i initial:"+i);
 
 
-        String playersTurnPhrase = "It is now player " + getName() + "'s turn.";
+        String playersTurnPhrase = getName() + "'s turn.";
         System.out.println(playersTurnPhrase); //returns the name of the player who's
         // turn it is
         for (int i = 0; i < playersTurnPhrase.length(); i++) {
-            System.out.print("_");
+            System.out.print("‾");
 
         }
         System.out.println();
