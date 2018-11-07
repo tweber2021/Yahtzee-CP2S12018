@@ -74,6 +74,8 @@ public class Rules {
                     System.out.println(checkMatch(dice, 3));
                     return checkMatch(dice, 3);
 
+                    // TODO
+
 
                 //case 8 is FourOfAKind
                 case (8):
@@ -82,11 +84,15 @@ public class Rules {
                     System.out.println(checkMatch(dice, 4));
                     return checkMatch(dice, 4);
 
+                    // TODO
+
 
                 //case 9 is SmallStraight
                 case (9):
                     //test print lines were for testing.
                     System.out.println("Test 9");
+                    categoryScore[chose - 1] = scoreStraight(false,dice);
+                    categoryCheck[chose - 1] = true;
                     return true;
 
 
@@ -94,6 +100,8 @@ public class Rules {
                 case (10):
                     //test print lines were for testing.
                     System.out.println("Test 10");
+                    categoryScore[chose - 1] = scoreStraight(true,dice);
+                    categoryCheck[chose - 1] = true;
                     return true;
 
                 //case 11 is FullHouse
@@ -267,7 +275,20 @@ public class Rules {
     public static void testOfAKind(){
         System.out.println("Test of a Kind:");
 
-        // TODO: Test fixed checkMatch() method.
+        Rules rules = new Rules(new Player("TestUser"));
+
+        Die[] testDice = new Die[5];
+        for(int r=0;r<1000;r++){
+        for(int i=0;i<testDice.length;i++){
+            testDice[i] = new Die();
+            System.out.print(testDice[i].getFaceValue()+" ");
+        }
+            System.out.println();
+            for(int j=1;j<=5;j++){
+                System.out.println(j+" of a Kind: "+rules.checkMatch(testDice,j));
+            }
+            System.out.println();
+        }
 
         System.out.println("Test complete.");
     }

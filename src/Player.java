@@ -59,8 +59,8 @@ public class Player {
             }
 
             System.out.println("\n" + getName() + " rolled: ");
-            printDice(dice);
-            //printDice2(dice); // Temporary fix
+            //printDice(dice);
+            printDice2(dice); // Temporary fix
             System.out.println();
 
 
