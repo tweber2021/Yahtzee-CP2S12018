@@ -173,7 +173,8 @@ class Player {
             System.out.println();
             listCategories();
             choice = promptCategoryID();
-            valid = (choice >= 1 && choice <= 13 && !rules.checkCategory(choice));
+            boolean bonusAvailable = ((choice==12)&&!((rules.getCategoryScore(12)==0)&&(rules.checkCategory(12))));
+            valid = ((choice >= 1 && choice <= 13) && (!rules.checkCategory(choice)|| bonusAvailable));
             if (!valid) {System.out.println("The category you've picked has been used or is an invalid number.");}
         }
         rules.scoreCategory(dice,choice); // Score in the category
