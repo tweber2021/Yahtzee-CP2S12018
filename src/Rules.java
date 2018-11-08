@@ -1,8 +1,8 @@
 class Rules {
 
-
     private int[] categoryScore;
     private boolean[] categoryCheck;
+    private int bonusPoints = 0;
 
     // Player class holds a play from its class, then will grab this.player to be specifice to correctly grabbing the right player
     // categoryCheck is a new 13 array list, the index is 0-12 however, but we have the program set all to false.
@@ -29,6 +29,11 @@ class Rules {
             // Cases 1-6 are Aces, Twos, etc
             // Cases 7-13 are the other categories
 
+            if(getMatch(dice,5)!=-1 && categoryCheck[11] && !categoryCheck[getMatch(dice,5)-1]){ // Joker Rules: Upper deck has priority. A bonus Yahtzee of fours needs to be used in the fours category instead.
+                System.out.println("Joker Rules: This Yahtzee must be used to fill out the "+getMatch(dice,5)+"'s.");
+                chose = getMatch(dice,5);
+            }
+
             if(chose>0 && chose<7){ // Deal with cases 1-6 since they're all handled the same
                 if (checkUpper(dice, chose)) {
                     categoryScore[chose - 1] = sumDice(dice, chose);
@@ -39,39 +44,34 @@ class Rules {
 
                 //case 7 is ThreeOfAKind
                 case (7):
-                    if(getMatch(dice,3)!=-1){categoryScore[chose - 1] = getMatch(dice,3)*3;} // Gets the faceValue with three instances, multiplies by 3 to get the score
+                    if(getMatch(dice,3)!=-1){categoryScore[chose - 1] = sumDice(dice);}
                     break;
 
                 //case 8 is FourOfAKind
                 case (8):
-                    if(getMatch(dice,4)!=-1){categoryScore[chose - 1] = getMatch(dice,4)*4;} // Gets the faceValue with four instances, multiplies by 4 to get the score
+                    if(getMatch(dice,4)!=-1){categoryScore[chose - 1] = sumDice(dice);}
                     break;
 
                 //case 9 is SmallStraight
                 case (9):
                     categoryScore[chose - 1] = scoreStraight(false,dice);
-                    System.out.println("SS: "+scoreStraight(false,dice));
+                    if(getMatch(dice,5)!=-1){categoryScore[chose - 1] = 30;} // Joker Rule: Yahtzee counts
                     break;
 
                 //case 10 is LargeStraight
                 case (10):
                     categoryScore[chose - 1] = scoreStraight(true,dice);
-                    System.out.println("LS: "+scoreStraight(true,dice));
+                    if(getMatch(dice,5)!=-1){categoryScore[chose - 1] = 40;} // Joker Rule: Yahtzee counts
                     break;
 
                 //case 11 is FullHouse
                 case (11):
-                    if (checkFullHouse(dice)) {
-                        categoryScore[chose - 1] = 25;
-                    }
+                    if (checkFullHouse(dice) || getMatch(dice,5)!=-1) {categoryScore[chose - 1] = 25;} // Joker Rule: Yahtzee counts
                     break;
 
                 //case 12 is Yahtzee
                 case (12):
-                    if(getMatch(dice,5)!=-1){
-                        if(!categoryCheck[chose-1]){categoryScore[chose - 1]= 50;} // First Yahtzee score is 50 the first time
-                        else{categoryScore[chose - 1]+= 100;} // Add 100 bonus points for subsequent Yahtzees
-                    }
+                    if(getMatch(dice,5)!=-1 && !categoryCheck[chose-1]){categoryScore[chose - 1]= 50;}
                     break;
 
                 //case 13 is Chance
@@ -222,11 +222,33 @@ class Rules {
 
     // End of methods used for straight scoring only
 
+    void checkBonuses(Die[] dice){
+        if(getMatch(dice,5)!=-1 && categoryScore[11]==50){
+            // Yahtzee bonus
+            System.out.println("Congratulations! You got a Yahtzee Bonus! (+100)");
+            bonusPoints+=100;
+        }
+        int sumUpper = 0;
+        for (int i=1;i<=6;i++) {
+            sumUpper += categoryScore[i];
+        }
+        if(sumUpper >= 63 && bonusPoints%2==0){ // Make sure the upper bonus hasn't been given already - if the bonus was already given, the bonus number will be odd for the rest of the game.
+            // Upper Bonus
+            System.out.println("You got an Upper Bonus! (+35)");
+            bonusPoints+=35;
+        }
+    }
+
+    int getBonusPoints() {
+        return bonusPoints;
+    }
+
     int getTotalScore(){
         int subTotal=0;
         for (int aCategoryScore : categoryScore) {
             subTotal += aCategoryScore;
         }
+        subTotal += bonusPoints;
         return subTotal;
     }
 

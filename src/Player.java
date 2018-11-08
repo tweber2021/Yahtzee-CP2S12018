@@ -40,7 +40,6 @@ class Player {
         System.out.println(playersTurnPhrase); //returns the name of the player who's turn it is
         for (int i = 0; i < playersTurnPhrase.length(); i++) {System.out.print("‾");}
         printScoreCard();
-        System.out.println();
 
         while (rollNumber <= 2) {
 
@@ -88,6 +87,7 @@ class Player {
             else{rollNumber++;}
         }
 
+        rules.checkBonuses(dice); // Allow Yahtzee and Upper Bonuses to be scored
         promptCategory(); // Prompt the user to choose a category and score that roll for them
 
         //below line is supposed to call the instance of the Rules class that the current player has, and then
@@ -102,8 +102,8 @@ class Player {
 
     private void listCategories() { // List available categories
         for (int index = 1; index <= 13; index++) {
-            boolean bonusAvailable = ((index==12)&&!((rules.getCategoryScore(12)==0)&&(rules.checkCategory(12))));
-            if (!rules.checkCategory(index)||bonusAvailable) { // Show categories if they haven't been used yet, but show Yahtzee if it's still available.
+           // boolean bonusAvailable = ((index==12)&&!((rules.getCategoryScore(12)==0)&&(rules.checkCategory(12))));
+            if (!rules.checkCategory(index)) { // Show categories if they haven't been used yet, but show Yahtzee if it's still available.
                 System.out.print(index+": "+getCategoryName(index)+"    ");
             }
         }
@@ -173,13 +173,11 @@ class Player {
             System.out.println();
             listCategories();
             choice = promptCategoryID();
-            boolean bonusAvailable = ((choice==12)&&!((rules.getCategoryScore(12)==0)&&(rules.checkCategory(12))));
-            valid = ((choice >= 1 && choice <= 13) && (!rules.checkCategory(choice)|| bonusAvailable));
+            valid = ((choice >= 1 && choice <= 13) && !rules.checkCategory(choice));
             if (!valid) {System.out.println("The category you've picked has been used or is an invalid number.");}
         }
         rules.scoreCategory(dice,choice); // Score in the category
         printScoreCard();
-        System.out.println();
     }
 
     private static String getCategoryName(int categoryID){ // Returns a category's name
@@ -207,6 +205,8 @@ class Player {
         for (int x = 1; x <= 13; x++) {
             if(rules.checkCategory(x)){System.out.print(getCategoryName(x)+": " + rules.getCategoryScore(x)+" pts.   ");empty=false;}
         }
-        if(empty){System.out.println("No scores yet.");}
+        if(rules.getBonusPoints()>0){System.out.print("Bonus: "+rules.getBonusPoints()+" pts.");} // No need to factor into emptiness because a bonus on the first turn is impossible
+        if(empty){System.out.print("No scores yet.");}
+        System.out.println();
     }
 }
