@@ -48,8 +48,7 @@ class Player {
             }
 
             System.out.println("\n"+getName() + " rolled: ");
-            //printDice(dice);
-            printDice(dice); // Temporary fix
+            printDice(dice);
             System.out.println();
 
 
@@ -95,22 +94,20 @@ class Player {
 
         int prevScore = score;
         score = rules.getTotalScore();
-        System.out.println("Current Score: "+score+" (+"+(score-prevScore)+")");
+        System.out.println("Current Score: "+score+" (+"+(score-prevScore)+")"); // Print the score, and how many points the player gained during that turn
         System.out.println();
     }
-//need to call up the Rules class to calculate the score for the round
 
     private void listCategories() { // List available categories
         for (int index = 1; index <= 13; index++) {
-           // boolean bonusAvailable = ((index==12)&&!((rules.getCategoryScore(12)==0)&&(rules.checkCategory(12))));
-            if (!rules.checkCategory(index)) { // Show categories if they haven't been used yet, but show Yahtzee if it's still available.
-                System.out.print(index+": "+getCategoryName(index)+"    ");
+            if (!rules.checkCategory(index)) { // Show categories if they haven't been used yet
+                System.out.print(index+": "+getCategoryName(index)+"    "); // Spacing like this may need to be adjusted
             }
         }
         System.out.println();
     }
 
-    private static void printDice(Die[] dice){
+    private static void printDice(Die[] dice){ // List the dice - graphical dice have been scrapped
         for(int i=0;i<5;i++){System.out.print(dice[i].getFaceValue()+" ");}
     }
 
@@ -142,7 +139,7 @@ class Player {
         return output;
     }
 
-    private static String fetchParam(String str, int index){
+    private static String fetchParam(String str, int index){ // Get a set parameter from a formatted input, like "1,2,3"
         int currentIndex = 0;
         int lastDelimPos = -1;
         int i;
@@ -156,7 +153,7 @@ class Player {
         return str.substring(lastDelimPos+1,i);
     }
 
-    private static boolean inIntArr(int query,int[] arr){
+    private static boolean inIntArr(int query,int[] arr){ // Searches for an integer in an array
         for (int anArr : arr) {
             if (anArr == query) {
                 return true;

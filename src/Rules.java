@@ -4,8 +4,6 @@ class Rules {
     private boolean[] categoryCheck;
     private int bonusPoints = 0;
 
-    // Player class holds a play from its class, then will grab this.player to be specifice to correctly grabbing the right player
-    // categoryCheck is a new 13 array list, the index is 0-12 however, but we have the program set all to false.
     Rules() {
         categoryCheck = new boolean[13];
 
@@ -15,15 +13,7 @@ class Rules {
 
     }
 
-    // This is getting the sc category and checking it
-    // pValue is temporary there choice every time chose is chosen, since its not in index form were -1 to make sure it selects 0-12
-    // As long as they chose categories 1-6 this will recognise certain number for the category
-    // checkUpper is making sure a number equals that rolled number and getting how many dice values equal up to it
-    // Now were setting the score for chosen category and making it there score which is sumDice that holds the score
-    // We check that category off by turning it true so it is not re usable
-
-
-    void scoreCategory(Die[] dice, int chose) { // Sets scores (maybe)
+    void scoreCategory(Die[] dice, int chose) { // Sets category scores
         if ((!checkCategory(chose)) || chose == 12) { // Disallow already previously scored categories to be scored again with the exception of Yahtzees.
 
             // Cases 1-6 are Aces, Twos, etc
@@ -95,7 +85,6 @@ class Rules {
         return false;
     }
 
-
     private int getMatch(Die[] dice, int numberOfDice) { // multipurpose "of a kind" function that returns what number has the matches, -1 if none
 
         for(int i=0;i<5;i++){ // Test how many matches each faceValue of Die i has
@@ -129,8 +118,6 @@ class Rules {
         return hasShortSegment&&hasLongSegment; // If we have both segments, then we have a full house!
     }
 
-
-
     // Just to clarify if the category is available for use, if it's false
     // the return value may look switched but default was set to check as long as its default it can be used.
     boolean checkCategory(int pValue) {
@@ -148,7 +135,6 @@ class Rules {
             return categoryScore[pValue-1];
         }
     }
-
 
     private int sumDice(Die[] dice){
         int subTotal = 0;
@@ -222,7 +208,7 @@ class Rules {
 
     // End of methods used for straight scoring only
 
-    void checkBonuses(Die[] dice){
+    void checkBonuses(Die[] dice){ // Grant bonuses if possible
         if(getMatch(dice,5)!=-1 && categoryScore[11]==50){
             // Yahtzee bonus
             System.out.println("Congratulations! You got a Yahtzee Bonus! (+100)");
@@ -243,7 +229,7 @@ class Rules {
         return bonusPoints;
     }
 
-    int getTotalScore(){
+    int getTotalScore(){ // Calculates the player's definitive score
         int subTotal=0;
         for (int aCategoryScore : categoryScore) {
             subTotal += aCategoryScore;
