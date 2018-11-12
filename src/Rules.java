@@ -360,8 +360,11 @@ public class Rules {
 
     // Check for the existence of a certain faceValue in the dice array
     private static boolean inDice(Die[] dice, int query){
+<<<<<<< HEAD
         for(int i=0;i<dice.length;i++){
             if(dice[i].getFaceValue()==query){return true;}
+=======
+>>>>>>> pr/14
 
         }
         return false;

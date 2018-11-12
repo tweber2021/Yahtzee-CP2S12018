@@ -8,19 +8,23 @@ public class Player {
     private String name;
     private int score;
     private Die[] dice;
+<<<<<<< HEAD
 
    private Rules rules;
  //   private boolean diceHeld;
  //   private int finalScore;
 Scanner chose = new Scanner(System.in);
+=======
+
+>>>>>>> pr/14
 
 
     //initializes constructors, getters, setters, and the array that holds the dice.
-    public Player(String name) {
         this.name = name;
         dice = new Die[5];
         for (int i = 0; i < dice.length; i++) {
             dice[i] = new Die();
+<<<<<<< HEAD
 
           
 
@@ -43,17 +47,19 @@ Scanner chose = new Scanner(System.in);
     //   public Player(int finalScore) {this.finalScore = finalScore;}
 
     public int getScore() {
-        return score;
+=======
     }
 
     private void setScore(int score) {
         this.score = score;
+>>>>>>> pr/14
     }
 
     public String getName() {
         return this.name;
     }
 
+<<<<<<< HEAD
 
  /*   public boolean getDiceHeld() {
         return diceHeld;
@@ -283,6 +289,8 @@ Arrays.fill(heldDie,false);
                 System.out.println(display);
             }
         }
+=======
+>>>>>>> pr/14
 
     } while (!answeredCorrectly)/*||if(rollNumber<2)*/;}
     else{rollNumber++;}
