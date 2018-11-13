@@ -1,15 +1,16 @@
-class Die {
+public class Die {
     private int faceValue;
 
-    Die(){ // Die constructor
+    public Die(){ // Die constructor
         rollDie(); // Automatically roll die upon creation
     }
+
     
-    void rollDie(){
+    public void rollDie(){
         this.faceValue = (int)(Math.floor(Math.random()*6)+1); // Randomize Die's faceValue
     }
 
-    int getFaceValue() { // use [objectName].getFaceValue in code to get the Die's value
+    public int getFaceValue() { // use [objectName].getFaceValue in code to get the Die's value
         return this.faceValue;
     }
 }

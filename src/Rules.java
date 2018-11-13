@@ -525,15 +525,17 @@ class Rules {
 
     // Check for the existence of a certain faceValue in the dice array
     private static boolean inDice(Die[] dice, int query){
-<<<<<<< HEAD
         for(int i=0;i<dice.length;i++){
             if(dice[i].getFaceValue()==query){return true;}
+<<<<<<< HEAD
 =======
         for (Die aDice : dice) {
             if (aDice.getFaceValue() == query) {
                 return false;
             }
 >>>>>>> pr/14
+=======
+>>>>>>> parent of e45ef93... Merge branch 'pr/14'
 
         }
         return true;

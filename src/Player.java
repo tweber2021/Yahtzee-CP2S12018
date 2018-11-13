@@ -8,12 +8,12 @@ class Player {
     private String name;
     private int score;
     private Die[] dice;
-<<<<<<< HEAD
 
    private Rules rules;
  //   private boolean diceHeld;
  //   private int finalScore;
 Scanner chose = new Scanner(System.in);
+<<<<<<< HEAD
 =======
     private Rules rules;
     private Scanner sc = new Scanner(System.in); // Scanner used for everything
@@ -23,11 +23,16 @@ Scanner chose = new Scanner(System.in);
 
     //initializes constructors, getters, setters, and the array that holds the dice.
     Player(String name) {
+=======
+
+
+    //initializes constructors, getters, setters, and the array that holds the dice.
+    public Player(String name) {
+>>>>>>> parent of e45ef93... Merge branch 'pr/14'
         this.name = name;
         dice = new Die[5];
         for (int i = 0; i < dice.length; i++) {
             dice[i] = new Die();
-<<<<<<< HEAD
 
           
 
@@ -50,6 +55,7 @@ Scanner chose = new Scanner(System.in);
     //   public Player(int finalScore) {this.finalScore = finalScore;}
 
     public int getScore() {
+<<<<<<< HEAD
 =======
         }
         rules = new Rules();
@@ -58,13 +64,19 @@ Scanner chose = new Scanner(System.in);
     int getScore() {
 >>>>>>> pr/14
         return score;
+=======
+        return score;
+    }
+
+    private void setScore(int score) {
+        this.score = score;
+>>>>>>> parent of e45ef93... Merge branch 'pr/14'
     }
 
     String getName() {
         return this.name;
     }
 
-<<<<<<< HEAD
 
  /*   public boolean getDiceHeld() {
         return diceHeld;
@@ -294,6 +306,7 @@ Arrays.fill(heldDie,false);
                 System.out.println(display);
             }
         }
+<<<<<<< HEAD
 =======
     void takeTurn() {
 
@@ -354,6 +367,8 @@ Arrays.fill(heldDie,false);
         rules.checkBonuses(dice); // Allow Yahtzee and Upper Bonuses to be scored
         promptCategory(); // Prompt the user to choose a category and score that roll for them
 >>>>>>> pr/14
+=======
+>>>>>>> parent of e45ef93... Merge branch 'pr/14'
 
         //below line is supposed to call the instance of the Rules class that the current player has, and then
         //calculate the score of the roll before starting the next player's turn.
