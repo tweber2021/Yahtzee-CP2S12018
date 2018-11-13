@@ -13,3 +13,4 @@ class Die {
         return this.faceValue;
     }
 }
+
